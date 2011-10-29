@@ -4,7 +4,7 @@ public class Node {
 	Point loc;
 	int strength;
 	float dir;
-	
+
 	public Node() {
 		loc = new Point();
 		strength = -1;
