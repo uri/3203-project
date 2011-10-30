@@ -15,14 +15,21 @@ class Controller {
 	
 	HashMap<Character, String> charArgs;
 	HashMap<String, String> stringArgs;
+	
+	Network network;
 
-	public Controller() {
+	private Controller() {
 		charArgs = new HashMap<Character, String>();
 		stringArgs = new HashMap<String, String>();
 	}
 
-	public Controller(String[] args) {
+	// Constructor
+	public Controller(String[] args, Network network) {
 		this();
+		
+		// Set the network
+		this.network = network;
+		
 
 		// Parse the string
 		
@@ -65,6 +72,9 @@ class Controller {
 			int value = Integer.parseInt(charArgs.get('n'));
 			
 			// TODO: Do something with this value	
+			for (int i = 0; i < 100; i++) {
+				network.addNode(new Node());
+			}
 		}
 	}
 
