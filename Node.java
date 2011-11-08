@@ -10,4 +10,10 @@ public class Node {
 		strength = -1;
 		dir = -1f;
 	}
+	
+	public Node(int x, int y) {
+		loc = new Point(x,y);
+		strength = 55;
+		dir = -1f;
+	}
 }
