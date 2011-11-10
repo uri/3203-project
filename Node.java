@@ -11,9 +11,9 @@ public class Node {
 		dir = -1f;
 	}
 	
-	public Node(int x, int y) {
+	public Node(int x, int y,int r) {
 		loc = new Point(x,y);
-		strength = 55;
+		strength = r;
 		dir = -1f;
 	}
 }

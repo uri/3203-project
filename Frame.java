@@ -8,11 +8,13 @@ public class Frame extends JFrame{
 	public static final String FRAME_NAME = "3203 - Networking";
 	Network network;
 	Panel view;
+	int radius,n;
 	
 	
 	public Frame(String name) {
 		super(name);
-		
+		radius = 50;
+		n=10;
 
 		// Make sure it exists properly
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,14 +28,44 @@ public class Frame extends JFrame{
 		setJMenuBar(menuBar);
 		JMenu sensorsMenu = new JMenu("Sensors");
 		JMenuItem sampleSensors = new JMenuItem("10");
+		JMenuItem sampleSensors2 = new JMenuItem("20");
 		sensorsMenu.add(sampleSensors);
+		sensorsMenu.add(sampleSensors2);
 		menuBar.add(sensorsMenu);
+		JMenu radiusMenu = new JMenu("Radius");
+		JMenuItem sampleRadius = new JMenuItem("50");
+		JMenuItem sampleRadius2 = new JMenuItem("60");
+		radiusMenu.add(sampleRadius);
+		radiusMenu.add(sampleRadius2);
+		menuBar.add(radiusMenu);
+		
 		
 		//action listeners for the menu bar
 		sampleSensors.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("debuggin!");
-				network = new Network(10);
+				n = 10;
+				network = new Network(n,radius);
+				view.DrawNetwork(network);
+			}
+		});
+		sampleSensors2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				n = 20;
+				network = new Network(n,radius);
+				view.DrawNetwork(network);
+			}
+		});
+		sampleRadius.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				radius = 50;
+				network = new Network(n,radius);
+				view.DrawNetwork(network);
+			}
+		});
+		sampleRadius2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				radius = 60;
+				network = new Network(n,radius);
 				view.DrawNetwork(network);
 			}
 		});
