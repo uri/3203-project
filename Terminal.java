@@ -21,7 +21,7 @@ public class Terminal {
 	public static void main (String [] args) {
 		Terminal test = new Terminal(args);
 		
-		for (Node n : test.network.getNodeList()) {
+		for (Node n : test.network.getSensorList()) {
 			System.out.println(n.strength);
 		}
 	}
