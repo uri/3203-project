@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 public class Network{
 	ArrayList<Node> nodelist;
@@ -14,15 +17,25 @@ public class Network{
 		Node temp = new Node();
 		Random rand = new Random();
 		sensorlist = new ArrayList<Node>();
+		
 		sensorlist.add(new Node(10,10,r));
 		//currently this algorithm doesn't protect from multile sensors at the same location
 		for (int i = 1; i < n; i++)
 		{
 			x = rand.nextInt(i);//selects a random node to place the new node near
 			temp = sensorlist.get(x);
-			sensorlist.add(new Node(
-					temp.loc.x+rand.nextInt(temp.strength-10),
-					temp.loc.x+rand.nextInt(temp.strength-10),r));
+			
+			
+			Node newNode = null;
+			
+			// Make sure we don't add it twice
+			while(sensorlist.contains(newNode) || newNode == null) {
+				newNode = new Node(
+						temp.loc.x+rand.nextInt(temp.strength-10),
+						temp.loc.x+rand.nextInt(temp.strength-10),r);
+			}
+			
+			sensorlist.add(newNode);
 		}
 	}
 	

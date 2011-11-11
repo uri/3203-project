@@ -16,4 +16,8 @@ public class Node {
 		strength = r;
 		dir = -1f;
 	}
+	
+	boolean equals (Node n) {
+		return (this.loc.x == n.loc.x && this.loc.y == n.loc.y);
+	}
 }
