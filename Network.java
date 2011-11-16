@@ -10,6 +10,7 @@ public class Network{
 	
 	public Network() {//this constructor may be irrelevant
 		sensorlist = new ArrayList<Node>();
+		sensorlist.add(new Node(10,10,50));
 	}
 	public Network(int n, int radius){
 		int x = 0;
@@ -19,7 +20,6 @@ public class Network{
 		sensorlist = new ArrayList<Node>();
 		
 		sensorlist.add(new Node(10,10,r));
-		//currently this algorithm doesn't protect from multile sensors at the same location
 		for (int i = 1; i < n; i++)
 		{
 			x = rand.nextInt(i);//selects a random node to place the new node near

@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
@@ -8,13 +9,15 @@ import java.util.Iterator;
 
 public class Panel extends JPanel {
 	
-	public final static int WIDTH = 480;
-	public final static int HEIGHT = 480;
-	
 	Network network;
 	
 	public Panel() {
+		setLayout(null);
 		network = new Network();
+		JLabel inventoryLabel = new JLabel("Inventory");
+		inventoryLabel.setSize(60,10);
+		inventoryLabel.setLocation(10,0);
+		add(inventoryLabel);
 	}
 	
 	public void DrawNetwork(Network n){

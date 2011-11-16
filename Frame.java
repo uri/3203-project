@@ -10,76 +10,46 @@ public class Frame extends JFrame{
 
 	public static final String FRAME_NAME = "3203 - Networking";
 	Network network;
-	Panel view;
-	int radius,n;
+	View view;
+	int strength,sensors;
+
+	public final static int WIDTH = 800;
+	public final static int HEIGHT = 580;
 	
 	
 	public Frame(String name) {
 		super(name);
-		radius = 50;
-		n=10;
+		strength = 50;
+		sensors = 10;
 
 		// Make sure it exists properly
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Add the JPanel
-		view = new Panel();
+		view = new View();
 		getContentPane().add(view);
 		
-		//Create the menu bar
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		JMenu sensorsMenu = new JMenu("Sensors");
-		JMenuItem sampleSensors = new JMenuItem("10");
-		JMenuItem sampleSensors2 = new JMenuItem("20");
-		sensorsMenu.add(sampleSensors);
-		sensorsMenu.add(sampleSensors2);
-		menuBar.add(sensorsMenu);
-		JMenu radiusMenu = new JMenu("Radius");
-		JMenuItem sampleRadius = new JMenuItem("50");
-		JMenuItem sampleRadius2 = new JMenuItem("60");
-		radiusMenu.add(sampleRadius);
-		radiusMenu.add(sampleRadius2);
-		menuBar.add(radiusMenu);
-		
-		
-		//action listeners for the menu bar
-		sampleSensors.addActionListener(new ActionListener(){
+		//add ActionListeners
+		view.GetUpdateButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				n = 10;
-				network = new Network(n,radius);
-				view.DrawNetwork(network);
-			}
-		});
-		sampleSensors2.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				n = 20;
-				network = new Network(n,radius);
-				view.DrawNetwork(network);
-			}
-		});
-		sampleRadius.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				radius = 50;
-				network = new Network(n,radius);
-				view.DrawNetwork(network);
-			}
-		});
-		sampleRadius2.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				radius = 60;
-				network = new Network(n,radius);
-				view.DrawNetwork(network);
+				sensors = view.getSensors();
+				strength = view.getStrength();
+				update();
 			}
 		});
 		
 
 		// Size the frame.
-		setSize(Panel.WIDTH, Panel.HEIGHT);
+		setSize(WIDTH, HEIGHT);
 //		pack();
 
 		// Show it.
 		setVisible(true);
+	}
+	
+	private void update(){
+		network = new Network(sensors, strength);
+		view.updateNetwork(network, network);
 	}
 	
 	public static void main(String [] args){
