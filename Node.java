@@ -1,7 +1,8 @@
 import java.awt.Point;
 
 public class Node {
-	Point loc, direction, angle;
+	Point loc;
+	int direction, angle;
 
 	public Node() {
 		loc = new Point();
