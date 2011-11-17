@@ -3,23 +3,30 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+/*this is intended for omnidirectional networks. Use DirectedNetwork
+ * for directed networks.
+*/
+
 public class Network{
-	ArrayList<Node> nodelist;
 	ArrayList<Node> sensorlist;
-	int r;
+	int strength;
 	
-	public Network() {//this constructor may be irrelevant
+	private static int DEFAULTX = 100;
+	private static int DEFAULTY = 100;
+	
+	public Network() {
+		strength = 50;
 		sensorlist = new ArrayList<Node>();
-		sensorlist.add(new Node(10,10,50));
+		sensorlist.add(new Node(DEFAULTX,DEFAULTY));
 	}
-	public Network(int n, int radius){
+	public Network(int n, int s){
 		int x = 0;
-		r = radius;
+		strength = s;
 		Node temp = new Node();
 		Random rand = new Random();
 		sensorlist = new ArrayList<Node>();
-		
-		sensorlist.add(new Node(10,10,r));
+		//starting node
+		sensorlist.add(new Node(DEFAULTX,DEFAULTY));
 		for (int i = 1; i < n; i++)
 		{
 			x = rand.nextInt(i);//selects a random node to place the new node near
@@ -31,16 +38,12 @@ public class Network{
 			// Make sure we don't add it twice
 			while(sensorlist.contains(newNode) || newNode == null) {
 				newNode = new Node(
-						temp.loc.x+rand.nextInt(temp.strength-10),
-						temp.loc.x+rand.nextInt(temp.strength-10),r);
+						temp.getX()+rand.nextInt(strength-10),
+						temp.getY()+rand.nextInt(strength-10));
 			}
 			
 			sensorlist.add(newNode);
 		}
-	}
-	
-	public void addNode(Node n) {
-		nodelist.add(n);
 	}
 	
 	ArrayList<Node> getSensorList() {

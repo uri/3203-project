@@ -27,11 +27,12 @@ public class Panel extends JPanel {
 	
 	public void paint(Graphics graph){
 		Graphics2D g = (Graphics2D)graph;
-		int r;
+		Arc2D temp = new Arc2D.Float();
 		for (Node s : network.getSensorList()){
-			r = s.strength;
-			g.draw(new Ellipse2D.Double(s.loc.x,s.loc.y,2*r,2*r));
-			g.fill(new Ellipse2D.Double(s.loc.x-3+r,s.loc.y-3+r,6,6));
+			//g.draw(new Ellipse2D.Double(s.loc.x,s.loc.y,2*r,2*r));
+			temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
+			g.draw(temp);
+			g.fill(new Ellipse2D.Double(s.loc.x-3,s.loc.y-3,6,6));
 		}
 		
 	};

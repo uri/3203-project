@@ -9,7 +9,7 @@ import javax.swing.JMenuItem;
 public class Frame extends JFrame{
 
 	public static final String FRAME_NAME = "3203 - Networking";
-	Network network;
+	Network network, directedNetwork;
 	View view;
 	int strength,sensors;
 
@@ -49,7 +49,8 @@ public class Frame extends JFrame{
 	
 	private void update(){
 		network = new Network(sensors, strength);
-		view.updateNetwork(network, network);
+		directedNetwork = new DirectedNetwork(network);
+		view.updateNetwork(network, directedNetwork);
 	}
 	
 	public static void main(String [] args){

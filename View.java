@@ -4,13 +4,12 @@ import java.awt.event.*;
 
 public class View extends JPanel{
 	
-	Panel omniPanel, directedPanel;
-	JPanel statsPanel;
-	
 	private static int STATS_HEIGHT = 90;
 	private static int TEXT_HEIGHT = 30;
     private static int FIELD_WIDTH = 80;
     
+    Panel omniPanel, directedPanel;
+	JPanel statsPanel;
     JTextField sensorsField, strengthField;
     JButton updateButton;
 	
@@ -38,7 +37,7 @@ public class View extends JPanel{
 		directedPanel.DrawNetwork(directed);
 		repaint();
 	}
-	
+	//this is some bad programming technique. I can saw that cause it's my code
 	public JPanel createStatsPanel(){
 		JPanel result = new JPanel();
 		result.setLayout(null);
@@ -102,6 +101,7 @@ public class View extends JPanel{
 		return Integer.parseInt(strengthField.getText());
 	}
 	
+	//this is for testing the appearance of the view.
 /*	public static void main(String args[]){
 		JFrame f = new JFrame("test");
 		f.getContentPane().add(new View());
