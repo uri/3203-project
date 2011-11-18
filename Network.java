@@ -69,6 +69,7 @@ public class Network{
 					// Check if already neightbour
 					if (!outter.getNeighbours().contains(inner)) {
 						outter.addNeighbour(inner);
+						
 					}
 					
 					// Add in the other direction
