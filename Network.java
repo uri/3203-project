@@ -44,9 +44,43 @@ public class Network{
 			
 			sensorlist.add(newNode);
 		}
+		
+		
+		// Make sure the neighbours are set.
+		attachNeighbours();
 	}
 	
-	ArrayList<Node> getSensorList() {
+	
+	/**
+	 * Sets the neighbours
+	 */
+	private void attachNeighbours() {
+		
+		
+		// Double loop all the way accross the sky
+		
+		for (Node outter : sensorlist) {
+			for (Node inner : sensorlist) {
+				
+				// Check if they are in a radius 
+				if (outter.getX() >= inner.getX() - strength && outter.getX() <= inner.getX() + strength &&	
+					outter.getY() >= inner.getY() - strength && outter.getY() <= inner.getY() + strength) {
+					
+					// Check if already neightbour
+					if (!outter.getNeighbours().contains(inner)) {
+						outter.addNeighbour(inner);
+					}
+					
+					// Add in the other direction
+					if (!inner.getNeighbours().contains(outter)) {
+						inner.addNeighbour(outter);
+					}
+				}
+			}
+		}
+	}
+	
+	public ArrayList<Node> getSensorList() {
 		return sensorlist;
 	}
 	

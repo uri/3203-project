@@ -35,7 +35,7 @@ public class DirectedNetwork extends Network{
 		
 		//this is just to demonstrate that the directed network is different from the parent one
 		for(Node s: sensorlist){
-			s.angle = 90;
+			s.setAngle(90);
 		}
 	}
 
