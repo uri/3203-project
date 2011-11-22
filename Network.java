@@ -62,20 +62,11 @@ public class Network{
 		for (Node outter : sensorlist) {
 			for (Node inner : sensorlist) {
 				
-				// Check if they are in a radius 
-				if (outter.getX() >= inner.getX() - strength && outter.getX() <= inner.getX() + strength &&	
-					outter.getY() >= inner.getY() - strength && outter.getY() <= inner.getY() + strength) {
-					
-					// Check if already neightbour
-					if (!outter.getNeighbours().contains(inner)) {
-						outter.addNeighbour(inner);
-						
-					}
-					
-					// Add in the other direction
-					if (!inner.getNeighbours().contains(outter)) {
-						inner.addNeighbour(outter);
-					}
+				int currentDistance = outter.getWeight(inner);
+				
+				// Add a neighbour
+				if (currentDistance <= strength && currentDistance > 0) {
+					outter.addAllEdge(inner);
 				}
 			}
 		}

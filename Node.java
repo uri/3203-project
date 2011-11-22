@@ -4,8 +4,9 @@ import java.util.ArrayList;
 public class Node {
 	private Point loc;
 	private int direction, angle;
-	private ArrayList<Node> neighbours;
+	private ArrayList<Node> allEdges;
 	private ArrayList<Integer> weights;
+	private ArrayList<Node> mstEdges;
 
 	public Node() {
 		loc = new Point();
@@ -38,12 +39,12 @@ public class Node {
 		return angle;
 	}
 	
-	public ArrayList<Node> getNeighbours() {
-		return neighbours;
+	public ArrayList<Node> getAllEdges() {
+		return allEdges;
 	}
 
-	public void addNeighbour(Node n) {
-		neighbours.add(n);
+	public void addAllEdge(Node n) {
+		allEdges.add(n);
 	}
 
 	public void setAngle(int i) {
@@ -77,6 +78,20 @@ public class Node {
 		weights.add(index, hyp);
 		
 		return hyp;
+	}
+
+	
+	
+	public ArrayList<Node> getMSTEdges() {
+		return mstEdges;
+	}
+
+	public void setMSTEdge(ArrayList<Node> edges) {
+		this.mstEdges = edges;
+	}
+	
+	public void addMSTEdge(Node n){
+		mstEdges.add(n);
 	}
 }
 
