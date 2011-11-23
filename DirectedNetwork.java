@@ -24,7 +24,29 @@ public class DirectedNetwork extends Network{
 	//Uri's Algorithm
 	public void MinimalSpanning(){
 		//this is a stub! Feel free to rename it and stuff
-		Algorithms.primMST(this);
+		//Algorithms.primMST(this);
+		int smallestDistance;
+		Node origin = new Node();
+		Node destination = new Node();
+		ArrayList<Node> temp = new ArrayList<Node>();
+		ArrayList<Node> destinationList = new ArrayList<Node>();
+		temp.add(sensorlist.get(0));
+		
+		for (int i = 0; i < sensorlist.size(); i++){
+			smallestDistance = 1000;
+			for(Node n : temp){
+				for(Node s: n.getAllEdges()){
+					if( (n.getWeight(s) < smallestDistance) && !temp.contains(s) ){
+						smallestDistance = n.getWeight(s);
+						origin = n;
+						destination = s;
+					}
+				}
+			}
+			temp.add(destination);
+			origin.addMSTEdge(destination);
+			destination.addMSTEdge(origin);
+		}
 	}
 	
 	//Jason's Algorithm

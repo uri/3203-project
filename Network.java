@@ -52,14 +52,11 @@ public class Network{
 	 */
 	protected void attachNeighbours() {
 		
-		
 		// Double loop all the way accross the sky
 		
 		for (Node outer : sensorlist) {
 			for (Node inner : sensorlist) {
-				
 				int currentDistance = outer.getWeight(inner);
-				
 				// Add a neighbour
 				if (currentDistance <= strength && currentDistance > 0) {
 					outer.addAllEdge(inner);

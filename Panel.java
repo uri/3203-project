@@ -39,12 +39,13 @@ public class Panel extends JPanel {
 			g.draw(temp);
 			g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
 		}
+		//System.out.println("\nNew Batch");
 		for (Node s: network.getSensorList()){
-			for (Node n: s.getAllEdges()){
+			for (Node n: s.getMSTEdges()){
 				g.setColor(Color.RED);
 				g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
-				//g.draw(new Line2D.Double(10,10,20,20));
-				System.out.println("iteration");
+		/*		System.out.println("Origin " + n.getX() + "," + n.getY() +
+						". Destination " + s.getX()+ "," + s.getY());*/
 			}
 		}
 		
