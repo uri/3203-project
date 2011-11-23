@@ -59,14 +59,14 @@ public class Network{
 		
 		// Double loop all the way accross the sky
 		
-		for (Node outter : sensorlist) {
+		for (Node outer : sensorlist) {
 			for (Node inner : sensorlist) {
 				
-				int currentDistance = outter.getWeight(inner);
+				int currentDistance = outer.getWeight(inner);
 				
 				// Add a neighbour
 				if (currentDistance <= strength && currentDistance > 0) {
-					outter.addAllEdge(inner);
+					outer.addAllEdge(inner);
 				}
 			}
 		}
