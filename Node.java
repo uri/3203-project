@@ -10,9 +10,13 @@ public class Node {
 
 	public Node() {
 		loc = new Point();
+		allEdges = new ArrayList<Node>();
+		weights = new ArrayList<Integer>();
+		mstEdges = new ArrayList<Node>();
 	}
 	
 	public Node(int x, int y) {
+		this();
 		loc = new Point(x,y);
 		direction = 0;
 		angle = 360;
