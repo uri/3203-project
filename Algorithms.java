@@ -25,32 +25,26 @@ public class Algorithms {
 		
 		
 		while (true) {
-			Node smallest = null;
+			Node smallest = new Node(10000,10000);
 			Node smallestParent = null;
 			for (Node n : searchList) {
-				
 				// Find the node with the smallest distance
 				for (Node neigh : n.getAllEdges()) {
-					
 					int distance = n.getWeight(neigh);
 					
-					// KLUDGE!!!!
-					if (smallest == null) smallest = neigh;
-					
-					else if (distance > 0 && n.getWeight(neigh) < n.getWeight(smallest) && !searchList.contains(smallest) ) {
+					if (distance > 0 && n.getWeight(neigh) < n.getWeight(smallest) && !searchList.contains(smallest) ) {
 						smallest = neigh;
 						smallestParent = n;
 					}
 				}
-
-				// Add the smallest node to the list
-				
 			}
+			if (searchList.size() == net.getSensorList().size())
+				break;
 			
-			if (smallest == null) break;
+			
 			
 			searchList.add(smallest);
-			smallestParent.addMSTEdge(smallestParent);
+			smallestParent.addMSTEdge(smallest);
 		} 
 		
 

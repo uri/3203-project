@@ -13,6 +13,8 @@ public class DirectedNetwork extends Network{
 		//sensorlist = n.getSensorList();
 		strength = n.strength;
 		
+		attachNeighbours();
+		
 		MinimalSpanning();
 		MaximalMatching();
 		AntennaOrientation();
@@ -22,6 +24,7 @@ public class DirectedNetwork extends Network{
 	//Uri's Algorithm
 	public void MinimalSpanning(){
 		//this is a stub! Feel free to rename it and stuff
+		Algorithms.primMST(this);
 	}
 	
 	//Jason's Algorithm

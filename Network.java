@@ -44,17 +44,13 @@ public class Network{
 			
 			sensorlist.add(newNode);
 		}
-		
-		
-		// Make sure the neighbours are set.
-		attachNeighbours();
 	}
 	
 	
 	/**
 	 * Sets the neighbours
 	 */
-	private void attachNeighbours() {
+	protected void attachNeighbours() {
 		
 		
 		// Double loop all the way accross the sky
