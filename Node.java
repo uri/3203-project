@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Node {
 	private Point loc;
-	private int direction, angle;
+	private double direction, angle;
 	private ArrayList<Node> allEdges;
 	private ArrayList<Integer> weights;
 	private ArrayList<Node> mstEdges;
@@ -35,11 +35,11 @@ public class Node {
 		return loc.y;
 	}
 	
-	public int getDirection(){
+	public double getDirection(){
 		return direction;
 	}
 	
-	public int getAngle(){
+	public double getAngle(){
 		return angle;
 	}
 	
@@ -51,8 +51,12 @@ public class Node {
 		allEdges.add(n);
 	}
 
-	public void setAngle(int i) {
+	public void setAngle(double i) {
 		angle = i;
+	}
+	
+	public void setDirection(double i){
+		direction = i;
 	}
 	
 	public ArrayList<Integer> getWeights() {
@@ -95,7 +99,10 @@ public class Node {
 	}
 	
 	public void addMSTEdge(Node n){
-		mstEdges.add(n);
+		if (!mstEdges.contains(n))
+			mstEdges.add(n);
+		else
+			return;
 	}
 }
 

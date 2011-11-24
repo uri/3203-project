@@ -47,7 +47,7 @@ public class View extends JPanel{
 		sensorsLabel.setLocation(10,0);
 		result.add(sensorsLabel);
 		
-		sensorsField = new JTextField("10");
+		sensorsField = new JTextField("2");
 		sensorsField.setLocation(10,TEXT_HEIGHT);
 		sensorsField.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		result.add(sensorsField);
@@ -57,7 +57,7 @@ public class View extends JPanel{
 		strengthLabel.setLocation(FIELD_WIDTH+10,0);
 		result.add(strengthLabel);
 		
-		strengthField = new JTextField("50");
+		strengthField = new JTextField("80");
 		strengthField.setLocation(10+FIELD_WIDTH,TEXT_HEIGHT);
 		strengthField.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		result.add(strengthField);
@@ -83,12 +83,12 @@ public class View extends JPanel{
 	
 	public int getSensors(){
 		int x = Integer.parseInt(sensorsField.getText());
-		if (x < 10){
+/*		if (x < 10){
 			sensorsField.setText("10");
 		}
 		else if (x > 100){
 			sensorsField.setText("100");
-		}
+		}*/
 		return Integer.parseInt(sensorsField.getText());
 	}
 	

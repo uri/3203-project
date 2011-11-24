@@ -35,7 +35,7 @@ public class Panel extends JPanel {
 		Arc2D temp = new Arc2D.Float();
 		for (Node s : network.getSensorList()){
 			//g.draw(new Ellipse2D.Double(s.loc.x,s.loc.y,2*r,2*r));
-			//temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
+			temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
 			g.draw(temp);
 			g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
 		}

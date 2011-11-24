@@ -37,7 +37,6 @@ public class Frame extends JFrame{
 				update();
 			}
 		});
-		
 
 		// Size the frame.
 		setSize(WIDTH, HEIGHT);
