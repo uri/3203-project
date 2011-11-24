@@ -6,6 +6,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+// The controller
 public class Frame extends JFrame{
 
 	public static final String FRAME_NAME = "3203 - Networking";

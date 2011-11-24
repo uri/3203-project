@@ -1,18 +1,18 @@
 
 public class StatisticsRunner {
 	
-	DirectedNetwork directedNetwork;
+	protected Network network;
 	
-	public StatisticsRunner(DirectedNetwork network) {
+	public StatisticsRunner(Network theNetwork) {
 		super();
 		
-		directedNetwork = network;
+		network = theNetwork;
 		
 	}
 	
 	
 	public void shortestPaths() {
-		
+		System.out.println("Running shortest paths...");
 	}
 	
 	

@@ -14,6 +14,8 @@ public class Network{
 	protected static int DEFAULTX = 100;
 	protected static int DEFAULTY = 100;
 	
+	protected StatisticsRunner stats;
+	
 	public Network() {
 		strength = 50;
 		sensorlist = new ArrayList<Node>();
@@ -71,5 +73,15 @@ public class Network{
 	public ArrayList<Node> getSensorList() {
 		return sensorlist;
 	}
+	
+	
+	public StatisticsRunner stats() {
+		if (null != stats)
+			return stats;
+		
+		stats = new StatisticsRunner(this);
+		return stats;
+	}
+	
 	
 }
