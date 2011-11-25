@@ -30,11 +30,16 @@ public class Frame extends JFrame{
 		getContentPane().add(view);
 		
 		//add ActionListeners
-		view.GetUpdateButton().addActionListener(new ActionListener(){
+		view.getUpdateButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				sensors = view.getSensors();
 				strength = view.getStrength();
 				update();
+			}
+		});
+		view.getStatsButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				statsWindow();
 			}
 		});
 
@@ -50,6 +55,11 @@ public class Frame extends JFrame{
 		network = new Network(sensors, strength);
 		directedNetwork = new DirectedNetwork(network);
 		view.updateNetwork(network, directedNetwork);
+	}
+	
+	private void statsWindow(){
+		//this is a stub! It should display a window and stats and stuff.
+		System.out.println("Stats!");
 	}
 	
 	public static void main(String [] args){

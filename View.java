@@ -11,7 +11,7 @@ public class View extends JPanel{
     Panel omniPanel, directedPanel;
 	JPanel statsPanel;
     JTextField sensorsField, strengthField;
-    JButton updateButton;
+    JButton updateButton,statsButton;
 	
 	public View(){
 		setLayout(null);
@@ -67,6 +67,11 @@ public class View extends JPanel{
 		updateButton.setLocation(10+FIELD_WIDTH*2,TEXT_HEIGHT);
 		result.add(updateButton);
 		
+		statsButton = new JButton("Stats!");
+		statsButton.setSize(100,TEXT_HEIGHT);
+		statsButton.setLocation(10+FIELD_WIDTH*3,TEXT_HEIGHT);
+		result.add(statsButton);
+		
 		
 		return result;
 	}
@@ -77,9 +82,13 @@ public class View extends JPanel{
 		return result;
 	}
 	
-	public JButton GetUpdateButton(){
+	public JButton getUpdateButton(){
 		return updateButton;
 	}
+	
+	public JButton getStatsButton(){
+		return statsButton;
+	};
 	
 	public int getSensors(){
 		int x = Integer.parseInt(sensorsField.getText());
