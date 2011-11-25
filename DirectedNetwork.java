@@ -12,21 +12,27 @@ public class DirectedNetwork extends Network{
 			temp = new Node(s.getX(),s.getY());
 			sensorlist.add(temp);
 		}
-		//sensorlist = n.getSensorList();
-	/*	temp = new Node(DEFAULTX,DEFAULTY);
-		sensorlist.add(temp);
-		temp = new Node(DEFAULTX-20,DEFAULTY-10);
-		sensorlist.add(temp);*/
 		strength = n.strength;
 		
 		attachNeighbours();
 		
 		MinimalSpanning();
 		AntennaOrientation();
-		
+		UpdateAllEdges();
 	}
 	
-	//Uri's Algorithm
+	public void UpdateAllEdges(){
+		for (Node n: sensorlist){
+			for (int i = 0; i < n.getAllEdges().size();i++){
+				Node s = n.getAllEdges().get(i);
+				if (n.getRelativeAngle(s) < n.getDirection() || n.getRelativeAngle(s) > (n.getAngle()+n.getDirection()) ){
+						n.removeAllEdge(s);
+						i--;
+				}
+			}
+		}
+	}
+	
 	public void MinimalSpanning(){
 		int smallestDistance;
 		Node origin = new Node();
@@ -61,36 +67,8 @@ public class DirectedNetwork extends Network{
 			double secondSmallestAngle = 361;
 			double x;
 			for (Node s: n.getMSTEdges()){
-				//System.out.println("A node in the neighbourlist");
-				currentAngle = 0;
-				double deltaX = (s.getX() - n.getX());
-				double deltaY = (s.getY() - n.getY());
-				//System.out.println("Delta X: " + deltaX + ". DeltaY: " + deltaY);
-				if (deltaX == 0 && deltaY>0){
-					currentAngle = 270;
-				}
-				else if (deltaX == 0 && deltaY<0){
-					currentAngle = 90;
-				}
-				else if (deltaX>0 && deltaY <= 0){//+ -
-					deltaY = -deltaY;
-					x = deltaY/deltaX;
-					currentAngle = Math.toDegrees(Math.atan(x));
-				}
-				else if (deltaX<0 && deltaY >= 0){//-+
-					deltaX = -deltaX;
-					x = deltaY/deltaX;
-					currentAngle = 180 + Math.toDegrees(Math.atan(x));
-				}
-				else if (deltaX<0 && deltaY<=0){//- -
-					x = deltaY/deltaX;
-					currentAngle = 180 - Math.toDegrees(Math.atan(x));
-				}
-				else if (deltaX>0 && deltaY >= 0){//+ +
-					x = deltaY/deltaX;
-					currentAngle = 360 - Math.toDegrees(Math.atan(x));
-				}
-				//System.out.println("current angle is " + currentAngle);
+
+				currentAngle = n.getRelativeAngle(s);
 				
 				if (currentAngle < smallestAngle)
 					smallestAngle =currentAngle;
@@ -99,14 +77,12 @@ public class DirectedNetwork extends Network{
 				if(currentAngle < secondSmallestAngle && currentAngle > smallestAngle)
 					secondSmallestAngle = currentAngle;
 			}
-			System.out.println("Second Smallest Angle: " + secondSmallestAngle);
 			//if statement ensures the smallest possible angle is drawn
 			if (secondSmallestAngle == 361)
 				secondSmallestAngle = largestAngle;
 			if (secondSmallestAngle-smallestAngle > 180){
 				n.setDirection(secondSmallestAngle);
 				n.setAngle(360+smallestAngle-secondSmallestAngle);
-				System.out.println("Doing This!");
 			}
 			else{
 				n.setDirection(smallestAngle);

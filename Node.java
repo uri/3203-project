@@ -5,13 +5,11 @@ public class Node {
 	private Point loc;
 	private double direction, angle;
 	private ArrayList<Node> allEdges;
-	private ArrayList<Integer> weights;
 	private ArrayList<Node> mstEdges;
 
 	public Node() {
 		loc = new Point();
 		allEdges = new ArrayList<Node>();
-		weights = new ArrayList<Integer>();
 		mstEdges = new ArrayList<Node>();
 	}
 	
@@ -50,6 +48,11 @@ public class Node {
 	public void addAllEdge(Node n) {
 		allEdges.add(n);
 	}
+	//this removes an edge from the AllEdge list. It's rather confusingly named
+	public void removeAllEdge(Node n){
+		allEdges.remove(n);
+		
+	}
 
 	public void setAngle(double i) {
 		angle = i;
@@ -59,15 +62,8 @@ public class Node {
 		direction = i;
 	}
 	
-	public ArrayList<Integer> getWeights() {
-		return weights;
-	}
-	
-	
-	/**
-	 */
+
 	public int getWeight(Node n) {
-		
 		// Weight will just be the hypotenous
 		int x = this.loc.x - n.getX();
 		int y = this.loc.y - n.getY();
@@ -75,20 +71,42 @@ public class Node {
 		int hyp = (int)(Math.pow(x, 2) + Math.pow(y, 2));
 		hyp = (int)(Math.pow(hyp, 0.5f));
 		
-		
 		return hyp;
 	}
 	
-	public int getWeight(Node n, int index) {
-		int hyp = getWeight(n);
-		
-		// TODO: This may be complete wrong and cause null pointer.
-		weights.add(index, hyp);
-		
-		return hyp;
-	}
+	public double getRelativeAngle(Node n){
+		double currentAngle = 0;
+		double x = 0;
+		double deltaX = (n.getX() - getX());
+		double deltaY = (n.getY() - getY());
 
-	
+		if (deltaX == 0 && deltaY>0){
+			currentAngle = 270;
+		}
+		else if (deltaX == 0 && deltaY<0){
+			currentAngle = 90;
+		}
+		else if (deltaX>0 && deltaY <= 0){//+ -
+			deltaY = -deltaY;
+			x = deltaY/deltaX;
+			currentAngle = Math.toDegrees(Math.atan(x));
+		}
+		else if (deltaX<0 && deltaY >= 0){//-+
+			deltaX = -deltaX;
+			x = deltaY/deltaX;
+			currentAngle = 180 + Math.toDegrees(Math.atan(x));
+		}
+		else if (deltaX<0 && deltaY<=0){//- -
+			x = deltaY/deltaX;
+			currentAngle = 180 - Math.toDegrees(Math.atan(x));
+		}
+		else if (deltaX>0 && deltaY >= 0){//+ +
+			x = deltaY/deltaX;
+			currentAngle = 360 - Math.toDegrees(Math.atan(x));
+		}
+		
+		return currentAngle;
+	}
 	
 	public ArrayList<Node> getMSTEdges() {
 		return mstEdges;

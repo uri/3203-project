@@ -34,18 +34,21 @@ public class Panel extends JPanel {
 		Graphics2D g = (Graphics2D)graph;
 		Arc2D temp = new Arc2D.Float();
 		for (Node s : network.getSensorList()){
-			//g.draw(new Ellipse2D.Double(s.loc.x,s.loc.y,2*r,2*r));
 			temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
 			g.draw(temp);
 			g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
 		}
 		//System.out.println("\nNew Batch");
 		for (Node s: network.getSensorList()){
-			for (Node n: s.getMSTEdges()){
-				g.setColor(Color.RED);
+			for (Node n: s.getAllEdges()){
+				g.setColor(Color.BLUE);
 				g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
 		/*		System.out.println("Origin " + n.getX() + "," + n.getY() +
 						". Destination " + s.getX()+ "," + s.getY());*/
+			}
+			for(Node n: s.getMSTEdges()){
+				g.setColor(Color.RED);
+				g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
 			}
 		}
 		
