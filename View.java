@@ -14,6 +14,7 @@ public class View extends JPanel{
     JButton updateButton,statsButton;
     
     JButton shortestPathButton;
+    JButton angleButton;
 	
 	public View(){
 		setLayout(null);
@@ -80,6 +81,12 @@ public class View extends JPanel{
 		shortestPathButton.setLocation(10+FIELD_WIDTH*5,TEXT_HEIGHT);
 		result.add(shortestPathButton);
 		
+		// Adding the Shortest Path button
+		angleButton = new JButton("Angle");
+		angleButton.setSize(100,TEXT_HEIGHT);
+		angleButton.setLocation(10+FIELD_WIDTH*6,TEXT_HEIGHT);
+		result.add(angleButton);
+		
 		return result;
 	}
 	
@@ -119,6 +126,14 @@ public class View extends JPanel{
 
 	public JButton getShortestPathButtong() {
 		return shortestPathButton;
+	}
+
+	public JButton getAngleButton() {
+		return angleButton;
+	}
+
+	public void setAngleButton(JButton angleButton) {
+		this.angleButton = angleButton;
 	}
 	
 	//this is for testing the appearance of the view.

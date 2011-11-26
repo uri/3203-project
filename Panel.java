@@ -11,7 +11,8 @@ import java.util.Iterator;
 public class Panel extends JPanel {
 	
 	Network network;
-	public boolean displayShortestPath;
+	public boolean isDisplayShorestPath;
+	public boolean displayAngles;
 	
 	public Panel() {
 		setLayout(null);
@@ -20,7 +21,8 @@ public class Panel extends JPanel {
 		inventoryLabel.setSize(60,10);
 		inventoryLabel.setLocation(10,0);
 		add(inventoryLabel);
-		displayShortestPath = false;
+		isDisplayShorestPath = false;
+		displayAngles = true;
 	}
 	
 	public void DrawNetwork(Network n){
@@ -36,17 +38,28 @@ public class Panel extends JPanel {
 		super.paint(graph);
 		Graphics2D g = (Graphics2D)graph;
 		Arc2D temp = new Arc2D.Float();
-		for (Node s : network.getSensorList()){
-			temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
-			g.draw(temp);
-			g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
+		
+		
+		// Display the angles/arcs
+		if (displayAngles) {
+			for (Node s : network.getSensorList()){
+				temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
+				g.draw(temp);
+				g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
+			}
+				
 		}
+		
+		
+		
 		//System.out.println("\nNew Batch");
 		for (Node s: network.getSensorList()){
 			for (Node n: s.getAllEdges()){
-				g.setColor(Color.BLUE);
-				g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
-		/*		System.out.println("Origin " + n.getX() + "," + n.getY() +
+//				g.setColor(Color.BLUE);
+//				g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
+		
+				
+				/*		System.out.println("Origin " + n.getX() + "," + n.getY() +
 						". Destination " + s.getX()+ "," + s.getY());*/
 			}
 			for(Node n: s.getMSTEdges()){
@@ -59,8 +72,8 @@ public class Panel extends JPanel {
 		
 		// Draw the shortest path
 		
-		if (network.getShortestPathList() != null && displayShortestPath) {
-			g.setColor(Color.blue);
+		if (network.getShortestPathList() != null && isDisplayShorestPath) {
+			g.setColor(Color.GREEN);
 			for (int i = 0; i < network.getShortestPathList().size() - 1; i++) {
 				Node n1 = network.getShortestPathList().get(i);
 				Node n2 = network.getShortestPathList().get(i + 1);

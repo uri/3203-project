@@ -58,6 +58,15 @@ public class Frame extends JFrame{
 				
 			}
 		});
+		
+		
+		view.getAngleButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				toggleAngleDisplay();
+			}
+
+			
+		});
 
 		// Size the frame.
 		setSize(WIDTH, HEIGHT);
@@ -83,14 +92,17 @@ public class Frame extends JFrame{
 //		Node end = directedNetwork.getSensorList().get(new Random().nextInt(directedNetwork.getSensorList().size()));
 		
 		// Toggle the button
-		if (view.directedPanel.displayShortestPath) {
-			view.directedPanel.displayShortestPath = false;
-		} else {
-			view.directedPanel.displayShortestPath = true;
-		}
+		view.directedPanel.isDisplayShorestPath = !view.directedPanel.isDisplayShorestPath;
 		Node start = directedNetwork.getSensorList().get(0);
 		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() - 1);
 		directedNetwork.shortestPath(start, end);
+		view.directedPanel.repaint();
+	}
+	
+	
+	private void toggleAngleDisplay() {
+		view.directedPanel.displayAngles = !view.directedPanel.displayAngles;
+		view.directedPanel.repaint();
 	}
 	
 	public static void main(String [] args){

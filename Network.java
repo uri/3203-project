@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 public class Network {
 	ArrayList<Node> sensorlist;
-	
+
 	List<Node> shortestPathList;
 	int strength;
 
@@ -36,7 +37,7 @@ public class Network {
 			x = rand.nextInt(i);// selects a random node to place the new node
 								// near
 			temp = sensorlist.get(x);
-			
+
 			// the maximum distance in either direction from any other node
 			int max = (int) Math.sqrt(strength * strength / 2);
 
@@ -50,33 +51,34 @@ public class Network {
 			sensorlist.add(newNode);
 		}
 	}
-	
-	
+
 	/**
 	 * Method to be called when trying to find the shortest path
+	 * 
 	 * @param startNode
 	 * @param endNode
 	 * @return
 	 */
 	public void shortestPath(Node startNode, Node endNode) {
 		List<Node> pathedList = dijkstra(sensorlist);
-		
+
 		Node end = null;
-		
+
 		// Find the node
 		for (Node n : pathedList) {
 			if (endNode.equals(n))
 				end = n;
 		}
-		
-		ArrayList<Node> returning = new ArrayList<Node>();
-		
+
+		shortestPathList = new ArrayList<Node>();
+		System.out.println("This is the weight to the last node: "
+				+ pathedList.get(pathedList.size() - 1).getDistance());
+
 		do {
-			returning.add(end);
+			shortestPathList.add(end);
 			end = end.getPredecessor();
 		} while (end != null);
 
-		shortestPathList = returning;
 	}
 
 	/**
@@ -88,63 +90,46 @@ public class Network {
 			n.setDistance(Integer.MAX_VALUE);
 		}
 
-		// Make a list of unvisited nodes
-		List<Node> unvisited = new ArrayList<Node>(graph);
-
 		// Make a list of visited nodes
-		List<Node> visited = new ArrayList<Node>();
+		Set<Node> visited = new HashSet<Node>();
+		List<Node> unvisited = new ArrayList<Node>();
 
-		// Get the starting node
-		Node startingNode = unvisited.get(0);
-		startingNode.setDistance(0);
-
-		visited.add(startingNode);
-		unvisited.remove(startingNode);
-
+		Node startNode = graph.get(0);
+		startNode.setDistance(0);
+		visited.add(startNode);
 		
-		// Setup the first node
-		for (Node n : startingNode.getAllEdges()) {
-
-			int distanceTo = startingNode.getWeight(n) + startingNode.getDistance();
-
-			if (distanceTo < n.getDistance()) {
-				n.setDistance(startingNode.getWeight(n) + startingNode.getDistance());
-				// No predecessor because we are starting.
-			}
-				
+		for (Node edge : startNode.getMSTEdges()) {
+			int distanceTo = startNode.getWeight(edge);
+			edge.setDistance(distanceTo);
+			edge.setPredecessor(startNode);
+			unvisited.add(edge);
 		}
 		
+		while (!unvisited.isEmpty()) {
+			Node cur = unvisited.get(unvisited.size() - 1);
+			for (Node edge : cur.getMSTEdges()) {
 
-		
-		// Iterate over the unvisted nodes
-		for (Node cur : unvisited) {
-			// Iterate over its neighbours
-			for (Node edge : cur.getAllEdges()) {
+				if (!visited.contains(edge)) {
+					unvisited.add(edge);
 
-				if (!visited.contains(cur)) {
-					// Get the distance from the current node to a neighbour
-					// plus the distance it took to get to the current.
 					int distanceTo = cur.getWeight(edge) + cur.getDistance();
 
 					// If the distance is smaller than it's current distance we
 					// update it.
 					if (distanceTo < edge.getDistance()) {
-						edge.setDistance(cur.getWeight(edge) + cur.getDistance());
+						edge.setDistance(distanceTo);
 						edge.setPredecessor(cur);
 					}
+
 				}
 
 			}
-
-			// Remove cur from the unvisted list
-			
-			// TODO: Remove from visited?
 			visited.add(cur);
+			unvisited.remove(cur);
+
 		}
-		
-		
-		// TODO: Check if this actually works
-		return visited;
+
+		return new ArrayList<Node>(visited);
 	}
 
 	/**
