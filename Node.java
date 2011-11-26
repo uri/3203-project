@@ -6,11 +6,14 @@ public class Node {
 	private double direction, angle;
 	private ArrayList<Node> allEdges;
 	private ArrayList<Node> mstEdges;
+	
+	private int distance;
 
 	public Node() {
 		loc = new Point();
 		allEdges = new ArrayList<Node>();
 		mstEdges = new ArrayList<Node>();
+		distance = Integer.MAX_VALUE;
 	}
 	
 	public Node(int x, int y) {
@@ -121,6 +124,14 @@ public class Node {
 			mstEdges.add(n);
 		else
 			return;
+	}
+
+	public void setDistance(int i) {
+		distance = i;
+	}
+	
+	public int getDistance() {
+		return distance;
 	}
 }
 
