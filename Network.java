@@ -10,12 +10,15 @@ import java.util.Set;
 
 public class Network {
 	ArrayList<Node> sensorlist;
+	
+	List<Node> shortestPathList;
 	int strength;
 
 	protected static int DEFAULTX = 100;
 	protected static int DEFAULTY = 100;
 
 	public Network() {
+		shortestPathList = null;
 		strength = 50;
 		sensorlist = new ArrayList<Node>();
 		sensorlist.add(new Node(DEFAULTX, DEFAULTY));
@@ -55,7 +58,7 @@ public class Network {
 	 * @param endNode
 	 * @return
 	 */
-	public List<Node> shortestPath(Node startNode, Node endNode) {
+	public void shortestPath(Node startNode, Node endNode) {
 		List<Node> pathedList = dijkstra(sensorlist);
 		
 		Node end = null;
@@ -72,8 +75,8 @@ public class Network {
 			returning.add(end);
 			end = end.getPredecessor();
 		} while (end != null);
-		
-		return returning;
+
+		shortestPathList = returning;
 	}
 
 	/**
@@ -134,7 +137,8 @@ public class Network {
 			}
 
 			// Remove cur from the unvisted list
-			unvisited.remove(cur); // Maybe not needed
+			
+			// TODO: Remove from visited?
 			visited.add(cur);
 		}
 		
@@ -163,6 +167,14 @@ public class Network {
 
 	public ArrayList<Node> getSensorList() {
 		return sensorlist;
+	}
+
+	public List<Node> getShortestPathList() {
+		return shortestPathList;
+	}
+
+	public void setShortestPathList(List<Node> shortestPathList) {
+		this.shortestPathList = shortestPathList;
 	}
 
 }

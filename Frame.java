@@ -1,5 +1,10 @@
+/**
+ * This is the controller
+ */
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -42,6 +47,17 @@ public class Frame extends JFrame{
 				statsWindow();
 			}
 		});
+		
+		/*******************************************************************
+		 *		Shortest Path Button 
+		 *******************************************************************/
+		view.getShortestPathButtong().addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				shortestPath();
+				
+			}
+		});
 
 		// Size the frame.
 		setSize(WIDTH, HEIGHT);
@@ -60,6 +76,21 @@ public class Frame extends JFrame{
 	private void statsWindow(){
 		//this is a stub! It should display a window and stats and stuff.
 		System.out.println("Stats!");
+	}
+	
+	private void shortestPath() {
+//		Node start = directedNetwork.getSensorList().get(new Random().nextInt(directedNetwork.getSensorList().size()));
+//		Node end = directedNetwork.getSensorList().get(new Random().nextInt(directedNetwork.getSensorList().size()));
+		
+		// Toggle the button
+		if (view.directedPanel.displayShortestPath) {
+			view.directedPanel.displayShortestPath = false;
+		} else {
+			view.directedPanel.displayShortestPath = true;
+		}
+		Node start = directedNetwork.getSensorList().get(0);
+		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() - 1);
+		directedNetwork.shortestPath(start, end);
 	}
 	
 	public static void main(String [] args){

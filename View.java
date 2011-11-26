@@ -12,11 +12,13 @@ public class View extends JPanel{
 	JPanel statsPanel;
     JTextField sensorsField, strengthField;
     JButton updateButton,statsButton;
+    
+    JButton shortestPathButton;
 	
 	public View(){
 		setLayout(null);
 		
-		statsPanel = createStatsPanel();
+		statsPanel = createBasePanel();
 		statsPanel.setLocation(0,0);
 		statsPanel.setSize(Frame.WIDTH,STATS_HEIGHT);
 		add(statsPanel);
@@ -38,7 +40,7 @@ public class View extends JPanel{
 		repaint();
 	}
 	//this is some bad programming technique. I can saw that cause it's my code
-	public JPanel createStatsPanel(){
+	public JPanel createBasePanel(){
 		JPanel result = new JPanel();
 		result.setLayout(null);
 		
@@ -72,6 +74,11 @@ public class View extends JPanel{
 		statsButton.setLocation(10+FIELD_WIDTH*3,TEXT_HEIGHT);
 		result.add(statsButton);
 		
+		// Adding the Shortest Path button
+		shortestPathButton = new JButton("SP");
+		shortestPathButton.setSize(100,TEXT_HEIGHT);
+		shortestPathButton.setLocation(10+FIELD_WIDTH*5,TEXT_HEIGHT);
+		result.add(shortestPathButton);
 		
 		return result;
 	}
@@ -108,6 +115,10 @@ public class View extends JPanel{
 		else if (x > 1000)
 			strengthField.setText("1000");
 		return Integer.parseInt(strengthField.getText());
+	}
+
+	public JButton getShortestPathButtong() {
+		return shortestPathButton;
 	}
 	
 	//this is for testing the appearance of the view.

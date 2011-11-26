@@ -11,6 +11,7 @@ import java.util.Iterator;
 public class Panel extends JPanel {
 	
 	Network network;
+	public boolean displayShortestPath;
 	
 	public Panel() {
 		setLayout(null);
@@ -19,6 +20,7 @@ public class Panel extends JPanel {
 		inventoryLabel.setSize(60,10);
 		inventoryLabel.setLocation(10,0);
 		add(inventoryLabel);
+		displayShortestPath = false;
 	}
 	
 	public void DrawNetwork(Network n){
@@ -31,6 +33,7 @@ public class Panel extends JPanel {
 	}
 	
 	public void paint(Graphics graph){
+		super.paint(graph);
 		Graphics2D g = (Graphics2D)graph;
 		Arc2D temp = new Arc2D.Float();
 		for (Node s : network.getSensorList()){
@@ -52,5 +55,21 @@ public class Panel extends JPanel {
 			}
 		}
 		
-	};
+		
+		
+		// Draw the shortest path
+		
+		if (network.getShortestPathList() != null && displayShortestPath) {
+			g.setColor(Color.blue);
+			for (int i = 0; i < network.getShortestPathList().size() - 1; i++) {
+				Node n1 = network.getShortestPathList().get(i);
+				Node n2 = network.getShortestPathList().get(i + 1);
+				
+				g.draw(new Line2D.Double(n1.getX(),n1.getY(),n2.getX(),n2.getY()));
+			}
+				
+		}
+		
+		
+	}
 }
