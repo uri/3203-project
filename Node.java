@@ -8,12 +8,14 @@ public class Node {
 	private ArrayList<Node> mstEdges;
 	
 	private int distance;
+	private Node pred;
 
 	public Node() {
 		loc = new Point();
 		allEdges = new ArrayList<Node>();
 		mstEdges = new ArrayList<Node>();
 		distance = Integer.MAX_VALUE;
+		pred = null;
 	}
 	
 	public Node(int x, int y) {
@@ -132,6 +134,14 @@ public class Node {
 	
 	public int getDistance() {
 		return distance;
+	}
+
+	public void setPredecessor(Node cur) {
+		pred = cur;
+	}
+
+	public Node getPredecessor() {
+		return pred;
 	}
 }
 

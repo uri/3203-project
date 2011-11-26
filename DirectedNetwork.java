@@ -96,62 +96,7 @@ public class DirectedNetwork extends Network{
 	
 	
 	
-	/**
-	 */
-	public void dijkstra(ArrayList<Node> graph) {
-		
-		// Set all the nodes to infinity
-		for (Node n : graph) {
-			n.setDistance(Integer.MAX_VALUE);
-		}
-		
-		
-		// Make a list of unvisited nodes
-		List<Node> unvisited = new ArrayList<Node>(graph);
-		
-		
-		// Make a list of visited nodes
-		List<Node> visited = new ArrayList<Node>();
-		
-		
-		// Get the starting node 
-		Node startingNode = graph.get(0);
-		startingNode.setDistance(0);
-		
-		visited.add(startingNode);
-		unvisited.remove(startingNode);
-		
-		for (Node n : startingNode.getAllEdges()) {
-			
-			int distanceTo = startingNode.getWeight(n) + startingNode.getDistance();
-			
-			if (distanceTo < n.getDistance())
-				n.setDistance(startingNode.getWeight(n) + startingNode.getDistance());
-		}
-		
-		
-		// Iterate over the unvisted nodes
-		for (Node cur : unvisited) {
-			// Iterate over its neighbours
-			for (Node edge : cur.getAllEdges()) {
-
-				if (!visited.contains(cur)) {
-					// Get the distance from the current node to a neighbour plus the distance it took to get to the current.
-					int distanceTo = cur.getWeight(edge) + cur.getDistance();
-					
-					// If the distance is smaller than it's current distance we update it.
-					if (distanceTo < edge.getDistance()) {
-						edge.setDistance(cur.getWeight(edge) + cur.getDistance());
-					}	
-				}
-				
-			}
-			
-			// Remove cur from the unvisted list
-			unvisited.remove(cur);
-			visited.add(cur);
-		}
-	}
+	
 
 }
 
