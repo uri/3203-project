@@ -96,8 +96,9 @@ public class StatisticsRunner {
 		
 		if (listOfDirectedNetworks.size() < 1) return;
 		
-		System.out.println("Running lengthOfNetwork on " + listOfDirectedNetworks.size() + " omnidirectional networks...");
-		System.out.println("Done running diameters. Average greatest distance is: " + averageLengthOfNetworkList(listOfNetworks));
+		// Doesn't work for omnidirectional because of shortestPaths
+		//System.out.println("Running lengthOfNetwork on " + listOfDirectedNetworks.size() + " omnidirectional networks...");
+		//System.out.println("Done running diameters. Average greatest distance is: " + averageLengthOfNetworkList(listOfNetworks));
 		
 		
 		System.out.println("Running lengthOfNetwork on " + listOfDirectedNetworks.size() + " directed networks...");
