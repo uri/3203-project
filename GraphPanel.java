@@ -45,9 +45,13 @@ public class GraphPanel extends JPanel {
 			for (Node s : network.getSensorList()){
 				temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
 				g.draw(temp);
-				g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
 			}
 				
+		}
+		
+		// Display the nodes
+		for (Node s : network.getSensorList()){
+			g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
 		}
 		
 		
