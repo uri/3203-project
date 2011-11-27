@@ -161,7 +161,7 @@ public class Network {
 		if (null != stats)
 			return stats;
 		
-		stats = new StatisticsRunner(this);
+		//stats = new StatisticsRunner(this);
 		return stats;
 	}
 	

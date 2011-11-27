@@ -67,6 +67,9 @@ public class Node {
 		direction = i;
 	}
 	
+	public String toString() {
+		return loc.toString();
+	}
 
 	public int getWeight(Node n) {
 		// Weight will just be the hypotenous
