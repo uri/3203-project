@@ -55,10 +55,31 @@ public class StatisticsRunner {
 	
 	
 	public void diameterOfNetwork() {
-//		ArrayList<Node> nodes = network.getSensorList();
-//		
-//		Node n1 = nodes.get(0);
-//		Node n2 = nodes.get(1);
+		
+		if (listOfDirectedNetworks.size() < 1) return;
+		
+		System.out.println("Running diameterOfNetwork on " + listOfDirectedNetworks.size() + " directed networks...");
+		
+		
+		int runningDistanceTotal = 0;
+		for (DirectedNetwork net : listOfDirectedNetworks) {
+			Node start = net.getSensorList().get(0);
+			Node end = net.getSensorList().get(net.getSensorList().size() - 1);
+			net.shortestPath(start, end);
+			
+			List<Node> shortestPath = net.getShortestPathList();
+			
+			Node biggest = start;
+			for (Node node : shortestPath) {
+				if (node.getDistance() > biggest.getDistance())
+					biggest = node;
+			}
+			runningDistanceTotal += biggest.getDistance();
+			System.out.println("The biggest distance in this network is " + biggest.getDistance());
+			
+		}
+		double average = (double)runningDistanceTotal/(double)listOfDirectedNetworks.size();
+		System.out.println("Done running diameters. Average greatest distance is: " + average);
 		
 		
 	}
