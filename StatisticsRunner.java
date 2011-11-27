@@ -29,7 +29,7 @@ public class StatisticsRunner {
 	public void shortestPaths() {
 		if (listOfDirectedNetworks.size() < 1) return; // no funny business..
 		
-		
+		// TODO: shortest paths doesn't work for omnidirectional networks!
 		//System.out.println("Running shortest paths on " + listOfNetworks.size() + "  networks...");
 		//System.out.println("Done running shortest paths. Average nodes in shortest-path: " + averageOfShortestPathsForNetwork(listOfNetworks));
 		
@@ -38,7 +38,7 @@ public class StatisticsRunner {
 	}
 	
 	
-	private double averageOfShortestPathsForNetwork(ArrayList<? extends Network> networks) {
+	public double averageOfShortestPathsForNetwork(ArrayList<? extends Network> networks) {
 		int runningTotal = 0;
 		
 		for (Network net : networks) {
@@ -54,11 +54,19 @@ public class StatisticsRunner {
 	
 	
 	public void diameterOfNetwork() {
+
+		System.out.println("Going to get the average diameter of " + listOfDirectedNetworks.size() + " directed networks");
+		System.out.println("Done.. the average was: " + averageDiameterOfDirectedNetworks());
+		
+	}
+	
+	
+	public double averageDiameterOfDirectedNetworks() {
 		// find the shortest paths between every pair of nodes in the network
 		// then pick the longest one.
 		// that's the diameter
 		// c.f. http://stackoverflow.com/questions/3174569/what-is-meant-by-diameter-of-a-network
-		
+		int runningTotalOfNetworkDiameters = 0;
 		for (Network net : listOfDirectedNetworks) {
 			
 			int currentLongestPath = 0;
@@ -78,11 +86,11 @@ public class StatisticsRunner {
 			}
 			
 			System.out.println("The longest shortest path for this network is: " + currentLongestPath);
-			
+			runningTotalOfNetworkDiameters += currentLongestPath;
 		}
 		
+		return (double)runningTotalOfNetworkDiameters/(double)listOfDirectedNetworks.size();
 	}
-	
 	
 	public void lengthOfRoutes() {
 		
@@ -98,7 +106,7 @@ public class StatisticsRunner {
 	}
 	
 	
-	private double averageLengthOfNetworkList(ArrayList<? extends Network> networks) {
+	public double averageLengthOfNetworkList(ArrayList<? extends Network> networks) {
 		
 		int runningDistanceTotal = 0;
 		for (Network net : networks) {
