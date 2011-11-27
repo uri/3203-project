@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class StatisticsRunner {
 	
@@ -22,6 +24,11 @@ public class StatisticsRunner {
 	
 	
 	public void diameterOfNetwork() {
+		ArrayList<Node> nodes = network.getSensorList();
+		
+		Node n1 = nodes.get(0);
+		Node n2 = nodes.get(1);
+		
 		
 	}
 	
