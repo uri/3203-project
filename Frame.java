@@ -98,7 +98,7 @@ public class Frame extends JFrame{
 		
 		// For now I'm just jamming this stuff in here. I'll get it in its own window eventually :)
 		int numberOfNetworks = 50;
-		int numberOfNodes = 8;
+		int numberOfNodes = 12;
 		int signalStrength = 50;
 		StatisticsRunner stats = new StatisticsRunner(numberOfNetworks, numberOfNodes, signalStrength);
 		

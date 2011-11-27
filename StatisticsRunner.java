@@ -27,7 +27,10 @@ public class StatisticsRunner {
 	
 	
 	public void shortestPaths() {
+		if (listOfDirectedNetworks.size() < 1) return; // no funny business..
 		System.out.println("Running shortest paths on " + listOfDirectedNetworks.size() + " directed networks...");
+		
+		int runningTotal = 0;
 		
 		for (DirectedNetwork net : listOfDirectedNetworks) {
 			Node start = net.getSensorList().get(0);
@@ -39,9 +42,10 @@ public class StatisticsRunner {
 			for (Node node : shortestPath) {
 				System.out.println(node.toString());
 			}
+			runningTotal += shortestPath.size();
 		}
-		
-		System.out.println("Done running shortest paths.");
+		double average = (double)runningTotal/(double)listOfDirectedNetworks.size();
+		System.out.println("Done running shortest paths. Average nodes in shortest-path: " + average);
 	}
 	
 	
