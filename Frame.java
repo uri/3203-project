@@ -13,6 +13,8 @@ public class Frame extends JFrame{
 	Network network, directedNetwork;
 	View view;
 	int strength,sensors;
+	
+	JFrame statsFrame;
 
 	public final static int WIDTH = 800;
 	public final static int HEIGHT = 580;
@@ -22,6 +24,8 @@ public class Frame extends JFrame{
 		super(name);
 		strength = 50;
 		sensors = 10;
+		
+		statsFrame = new StatsFrame();
 
 		// Make sure it exists properly
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,11 +80,25 @@ public class Frame extends JFrame{
 		network = new Network(sensors, strength);
 		directedNetwork = new DirectedNetwork(network);
 		view.updateNetwork(network, directedNetwork);
+		
+		// Shortest path
+		Node start = directedNetwork.getSensorList().get(0);
+		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() - 1);
+		directedNetwork.shortestPath(start, end);
+		
 	}
 	
 	private void statsWindow(){
 		//this is a stub! It should display a window and stats and stuff.
 		System.out.println("Stats!");
+		
+		// Toggle the frame
+		if (statsFrame.isVisible()) {
+			statsFrame.setVisible(false);
+		} else {
+			statsFrame.setVisible(true);
+		}
+		
 	}
 	
 	private void shortestPath() {
@@ -89,9 +107,6 @@ public class Frame extends JFrame{
 		
 		// Toggle the button
 		view.directedPanel.isDisplayShorestPath = !view.directedPanel.isDisplayShorestPath;
-		Node start = directedNetwork.getSensorList().get(0);
-		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() - 1);
-		directedNetwork.shortestPath(start, end);
 		view.directedPanel.repaint();
 	}
 	
