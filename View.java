@@ -1,6 +1,7 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class View extends JPanel{
 	
@@ -8,7 +9,7 @@ public class View extends JPanel{
 	private static int TEXT_HEIGHT = 30;
     private static int FIELD_WIDTH = 80;
     
-    Panel omniPanel, directedPanel;
+    GraphPanel omniPanel, directedPanel;
 	JPanel statsPanel;
     JTextField sensorsField, strengthField;
     JButton updateButton,statsButton;
@@ -24,11 +25,11 @@ public class View extends JPanel{
 		statsPanel.setSize(Frame.WIDTH,STATS_HEIGHT);
 		add(statsPanel);
 		
-		omniPanel = new Panel();
+		omniPanel = new GraphPanel();
 		omniPanel.setLocation(0,STATS_HEIGHT);
 		omniPanel.setSize(Frame.WIDTH/2,Frame.HEIGHT);
 		add(omniPanel);
-		directedPanel = new Panel();
+		directedPanel = new GraphPanel();
 		directedPanel.setLocation(Frame.WIDTH/2 +1,STATS_HEIGHT);
 		directedPanel.setSize(Frame.WIDTH/2,Frame.HEIGHT);
 		add(directedPanel);
