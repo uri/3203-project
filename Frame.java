@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+// The controller
 public class Frame extends JFrame{
 
 	public static final String FRAME_NAME = "3203 - Networking";
@@ -26,6 +27,7 @@ public class Frame extends JFrame{
 		sensors = 10;
 		
 		statsFrame = new StatsFrame();
+		network = directedNetwork = null;
 
 		// Make sure it exists properly
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,6 +46,9 @@ public class Frame extends JFrame{
 		});
 		view.getStatsButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				
+				
+				
 				statsWindow();
 			}
 		});
@@ -54,6 +59,7 @@ public class Frame extends JFrame{
 		view.getShortestPathButtong().addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
+				updateIfNeeded(); // else we get a npe
 				shortestPath();
 				
 			}
@@ -71,9 +77,16 @@ public class Frame extends JFrame{
 		// Size the frame.
 		setSize(WIDTH, HEIGHT);
 //		pack();
-
+		
+		
+		
 		// Show it.
 		setVisible(true);
+	}
+	
+	private void updateIfNeeded() {
+		if (null == network || null == directedNetwork)
+			update();
 	}
 	
 	private void update(){
@@ -98,6 +111,14 @@ public class Frame extends JFrame{
 		} else {
 			statsFrame.setVisible(true);
 		}
+		// For now I'm just jamming this stuff in here. I'll get it in its own window eventually :)
+		int numberOfNetworks = 500;
+		int numberOfNodes = 12;
+		int signalStrength = 50;
+		StatisticsRunner stats = new StatisticsRunner(numberOfNetworks, numberOfNodes, signalStrength);
+		
+		stats.shortestPaths();
+		stats.diameterOfNetwork();
 		
 	}
 	

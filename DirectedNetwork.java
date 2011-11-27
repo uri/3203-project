@@ -91,9 +91,6 @@ public class DirectedNetwork extends Network{
 		}
 	}
 	
-	
-	
-	
 
 }
 

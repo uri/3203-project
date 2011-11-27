@@ -16,7 +16,9 @@ public class Network {
 
 	protected static int DEFAULTX = 100;
 	protected static int DEFAULTY = 100;
-
+	
+	protected StatisticsRunner stats;
+	
 	public Network() {
 		shortestPathList = null;
 		strength = 50;
@@ -152,6 +154,16 @@ public class Network {
 	public ArrayList<Node> getSensorList() {
 		return sensorlist;
 	}
+	
+	
+	public StatisticsRunner stats() {
+		if (null != stats)
+			return stats;
+		
+		//stats = new StatisticsRunner(this);
+		return stats;
+	}
+	
 
 	public List<Node> getShortestPathList() {
 		return shortestPathList;
@@ -160,5 +172,6 @@ public class Network {
 	public void setShortestPathList(List<Node> shortestPathList) {
 		this.shortestPathList = shortestPathList;
 	}
+
 
 }
