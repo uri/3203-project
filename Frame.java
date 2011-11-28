@@ -144,6 +144,7 @@ public class Frame extends JFrame{
 		
 		stats.shortestPaths();
 		stats.diameterOfNetwork();
+		stats.lengthOfRoutes();
 		
 		
 		if (statsFrame == null) {

@@ -1,4 +1,4 @@
-/************************************************************************************* 
+/*************************************************************************************
  * ===================================================================================
  *
  * 
@@ -22,7 +22,6 @@ public class StatisticsRunner {
 	protected int numNodes;
 	
 	// Run times
-	
 	// TODO Set these in your methods
 	protected float rtShortestPath;
 	protected float rtDiameter;
@@ -64,6 +63,11 @@ public class StatisticsRunner {
 	 */
 	public void shortestPaths() {
 		if (listOfDirectedNetworks.size() < 1) return; // no funny business..
+<<<<<<< HEAD
+		
+		System.out.println("Running shortest paths on " + listOfDirectedNetworks.size() + " directed networks...");
+=======
+>>>>>>> jasonstats
 		
 		// TODO: shortest paths doesn't work for omnidirectional networks!
 		//System.out.println("Running shortest paths on " + listOfNetworks.size() + "  networks...");
@@ -85,6 +89,19 @@ public class StatisticsRunner {
 			List<Node> shortestPath = net.getShortestPathList();
 			runningTotal += shortestPath.size();
 		}
+<<<<<<< HEAD
+		double average = (double)runningTotal/(double)listOfDirectedNetworks.size();
+		
+		// TODO Set this to a variable instead of printing.
+		System.out.println("Done running shortest paths. Average nodes in shortest-path: " + average);
+	}
+	
+	
+	/**
+	 * 
+	 */
+	public void lengthOfRoutes() {
+=======
 		return (double)runningTotal/(double)networks.size();
 	}
 	
@@ -93,10 +110,17 @@ public class StatisticsRunner {
 
 		System.out.println("Going to get the average diameter of " + listOfDirectedNetworks.size() + " directed networks");
 		System.out.println("Done.. the average was: " + averageDiameterOfDirectedNetworks());
+>>>>>>> jasonstats
 		
 	}
 	
 	
+<<<<<<< HEAD
+	/**
+	 * 
+	 */
+	public void diameterOfNetwork() {
+=======
 	public double averageDiameterOfDirectedNetworks() {
 		// find the shortest paths between every pair of nodes in the network
 		// then pick the longest one.
@@ -129,6 +153,7 @@ public class StatisticsRunner {
 	}
 	
 	public void lengthOfRoutes() {
+>>>>>>> jasonstats
 		
 		if (listOfDirectedNetworks.size() < 1) return;
 		
@@ -162,7 +187,16 @@ public class StatisticsRunner {
 			runningDistanceTotal += biggest.getDistance();
 			
 		}
+<<<<<<< HEAD
+		double average = (double)runningDistanceTotal/(double)listOfDirectedNetworks.size();
+		
+		// TODO Set this to a variable instead of printing.
+		System.out.println("Done running diameters. Average greatest distance is: " + average);
+		
+		
+=======
 		return (double)runningDistanceTotal/(double)networks.size();
+>>>>>>> jasonstats
 	}
 
 	
@@ -181,7 +215,7 @@ public class StatisticsRunner {
 	/**
 	 * @param listOfNetworks
 	 */
-	public void setListOfNetworks(ArrayList<Network> listOfNetworks) {
+	public void setListOfNetworks(List<Network> listOfNetworks) {
 		this.listOfNetworks = listOfNetworks;
 	}
 
@@ -197,7 +231,7 @@ public class StatisticsRunner {
 	/**
 	 * @param listOfDirectedNetworks
 	 */
-	public void setListOfDirectedNetworks(ArrayList<DirectedNetwork> listOfDirectedNetworks) {
+	public void setListOfDirectedNetworks(List<DirectedNetwork> listOfDirectedNetworks) {
 		this.listOfDirectedNetworks = listOfDirectedNetworks;
 	}
 
@@ -296,8 +330,6 @@ public class StatisticsRunner {
 	public void setStrength(float strength) {
 		this.strength = strength;
 	}
-	
-	
 	
 
 }

@@ -94,8 +94,8 @@ public class Network {
 		}
 
 		shortestPathList = new ArrayList<Node>();
-		System.out.println("This is the weight to the last node: "
-				+ pathedList.get(pathedList.size() - 1).getDistance());
+		//System.out.println("This is the weight to the last node: "
+		//		+ pathedList.get(pathedList.size() - 1).getDistance());
 
 		do {
 			shortestPathList.add(end);
