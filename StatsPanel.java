@@ -36,7 +36,7 @@ public class StatsPanel extends JFrame{
 	/**
 	 * 
 	 */
-	public StatsPanel(StatisticsRunner stats) {
+	public StatsPanel() {
 		super("Statistics");
 		setLayout(null);
 		
@@ -65,13 +65,12 @@ public class StatsPanel extends JFrame{
 
 		
 		// Get the statistics class
-		this.stats = stats;
 		
 
 	}
 	
 	public void update() {
-		
+		if (stats == null) return;
 		numNodes.setText(""+stats.getNumNodes());
 		rtShortestPath.setText(""+stats.rtShortestPath);
 		rtDiameter.setText(""+stats.rtDiameter);
@@ -110,6 +109,10 @@ public class StatsPanel extends JFrame{
 		
 		strength = new JLabel("0");
 		addLabel(strength, 1*LABEL_WIDTH , 6 * LABEL_HEIGHT );
+	}
+
+	public void setStatisticsRunner(StatisticsRunner stats) {
+		this.stats = stats;
 	}
 	
 	

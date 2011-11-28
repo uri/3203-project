@@ -48,7 +48,7 @@ public class Frame extends JFrame{
 		strength = 50;
 		sensors = 10;
 		
-		// Make a new stats frame
+		statsFrame = new StatsPanel();
 		
 		network = null;
 		directedNetwork = null;
@@ -128,7 +128,8 @@ public class Frame extends JFrame{
 		directedNetwork.shortestPath(start, end);
 		
 		// Update the stats pane
-		statsFrame.update();
+		statsFrame.update();	
+		
 		
 	}
 	
@@ -146,10 +147,8 @@ public class Frame extends JFrame{
 		stats.diameterOfNetwork();
 		stats.lengthOfRoutes();
 		
+		statsFrame.setStatisticsRunner(stats);
 		
-		if (statsFrame == null) {
-			statsFrame = new StatsPanel(stats);
-		}
 		
 		// Toggle the frame
 		if (statsFrame.isVisible()) {
