@@ -72,9 +72,9 @@ public class StatsPanel extends JFrame{
 	public void update() {
 		if (stats == null) return;
 		numNodes.setText(""+stats.getNumNodes());
-		rtShortestPath.setText(""+stats.rtShortestPath);
-		rtDiameter.setText(""+stats.rtDiameter);
-		rtHops.setText(""+stats.rtHops);
+		rtShortestPath.setText(""+stats.getRtShortestPath());
+		rtDiameter.setText(""+stats.getRtDiameter());
+		rtHops.setText(""+stats.getRtHops());
 		angle.setText(""+stats.getAngle());
 		strength.setText(""+stats.getStrength());
 	}

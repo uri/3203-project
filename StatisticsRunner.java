@@ -24,9 +24,9 @@ public class StatisticsRunner {
 	// Run times
 	
 	// TODO Set these in your methods
-	protected float rtShortestPath;
-	protected float rtDiameter;
-	protected float rtHops;
+	protected double rtShortestPath;
+	protected double rtDiameter;
+	protected double rtHops;
 	
 	// Static stuff.
 	protected float angle;
@@ -56,6 +56,11 @@ public class StatisticsRunner {
 		}
 		
 		
+		// compute the stats for the directed network
+		this.setRtDiameter(averageDiameterOfDirectedNetworks());
+		this.setRtShortestPath(averageOfShortestPathsForNetwork(listOfDirectedNetworks));
+		this.setRtHops(averageLengthOfNetworkList(listOfDirectedNetworks));
+		
 	}
 	
 	
@@ -74,7 +79,7 @@ public class StatisticsRunner {
 	}
 	
 	
-	public double averageOfShortestPathsForNetwork(ArrayList<? extends Network> networks) {
+	private double averageOfShortestPathsForNetwork(ArrayList<? extends Network> networks) {
 		int runningTotal = 0;
 		
 		for (Network net : networks) {
@@ -97,7 +102,7 @@ public class StatisticsRunner {
 	}
 	
 	
-	public double averageDiameterOfDirectedNetworks() {
+	private double averageDiameterOfDirectedNetworks() {
 		// find the shortest paths between every pair of nodes in the network
 		// then pick the longest one.
 		// that's the diameter
@@ -143,7 +148,7 @@ public class StatisticsRunner {
 	}
 	
 	
-	public double averageLengthOfNetworkList(ArrayList<? extends Network> networks) {
+	private double averageLengthOfNetworkList(ArrayList<? extends Network> networks) {
 		
 		int runningDistanceTotal = 0;
 		for (Network net : networks) {
@@ -221,7 +226,7 @@ public class StatisticsRunner {
 	/**
 	 * @return
 	 */
-	public float getRtShortestPath() {
+	public double getRtShortestPath() {
 		return rtShortestPath;
 	}
 
@@ -229,7 +234,7 @@ public class StatisticsRunner {
 	/**
 	 * @param rtShortestPath
 	 */
-	public void setRtShortestPath(float rtShortestPath) {
+	public void setRtShortestPath(double rtShortestPath) {
 		this.rtShortestPath = rtShortestPath;
 	}
 
@@ -237,7 +242,7 @@ public class StatisticsRunner {
 	/**
 	 * @return
 	 */
-	public float getRtDiameter() {
+	public double getRtDiameter() {
 		return rtDiameter;
 	}
 
@@ -245,7 +250,7 @@ public class StatisticsRunner {
 	/**
 	 * @param rtDiameter
 	 */
-	public void setRtDiameter(float rtDiameter) {
+	public void setRtDiameter(double rtDiameter) {
 		this.rtDiameter = rtDiameter;
 	}
 
@@ -253,7 +258,7 @@ public class StatisticsRunner {
 	/**
 	 * @return
 	 */
-	public float getRtHops() {
+	public double getRtHops() {
 		return rtHops;
 	}
 
@@ -261,7 +266,7 @@ public class StatisticsRunner {
 	/**
 	 * @param rtHops
 	 */
-	public void setRtHops(float rtHops) {
+	public void setRtHops(double rtHops) {
 		this.rtHops = rtHops;
 	}
 
