@@ -195,11 +195,7 @@ public class Network {
 	}
 	
 	
-	public StatisticsRunner stats() {
-		if (null != stats)
-			return stats;
-		
-		//stats = new StatisticsRunner(this);
+	public StatisticsRunner getStatisticsRunner() {
 		return stats;
 	}
 	

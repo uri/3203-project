@@ -22,6 +22,7 @@ public class StatisticsRunner {
 	protected int numNodes;
 	
 	// Run times
+	// TODO Set these in your methods
 	protected float rtShortestPath;
 	protected float rtDiameter;
 	protected float rtHops;
@@ -62,6 +63,7 @@ public class StatisticsRunner {
 	 */
 	public void shortestPaths() {
 		if (listOfDirectedNetworks.size() < 1) return; // no funny business..
+		
 		System.out.println("Running shortest paths on " + listOfDirectedNetworks.size() + " directed networks...");
 		
 		int runningTotal = 0;
@@ -79,6 +81,8 @@ public class StatisticsRunner {
 			runningTotal += shortestPath.size();
 		}
 		double average = (double)runningTotal/(double)listOfDirectedNetworks.size();
+		
+		// TODO Set this to a variable instead of printing.
 		System.out.println("Done running shortest paths. Average nodes in shortest-path: " + average);
 	}
 	
@@ -119,6 +123,8 @@ public class StatisticsRunner {
 			
 		}
 		double average = (double)runningDistanceTotal/(double)listOfDirectedNetworks.size();
+		
+		// TODO Set this to a variable instead of printing.
 		System.out.println("Done running diameters. Average greatest distance is: " + average);
 		
 		

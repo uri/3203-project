@@ -29,7 +29,8 @@ public class Frame extends JFrame{
 	int sensors;
 	
 	// Statistics frame
-	JFrame statsFrame;
+	StatsPanel statsFrame;
+	
 
 	
 	
@@ -48,7 +49,6 @@ public class Frame extends JFrame{
 		sensors = 10;
 		
 		// Make a new stats frame
-		statsFrame = new StatsFrame();
 		
 		network = null;
 		directedNetwork = null;
@@ -127,18 +127,15 @@ public class Frame extends JFrame{
 		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() - 1);
 		directedNetwork.shortestPath(start, end);
 		
+		// Update the stats pane
+		statsFrame.update();
+		
 	}
 	
 	private void statsWindow(){
 		//this is a stub! It should display a window and stats and stuff.
 		System.out.println("Stats!");
 		
-		// Toggle the frame
-		if (statsFrame.isVisible()) {
-			statsFrame.setVisible(false);
-		} else {
-			statsFrame.setVisible(true);
-		}
 		// For now I'm just jamming this stuff in here. I'll get it in its own window eventually :)
 		int numberOfNetworks = 500;
 		int numberOfNodes = 12;
@@ -147,6 +144,19 @@ public class Frame extends JFrame{
 		
 		stats.shortestPaths();
 		stats.diameterOfNetwork();
+		
+		
+		if (statsFrame == null) {
+			statsFrame = new StatsPanel(stats);
+		}
+		
+		// Toggle the frame
+		if (statsFrame.isVisible()) {
+			statsFrame.setVisible(false);
+		} else {
+			statsFrame.setVisible(true);
+		}
+		
 		
 	}
 	
