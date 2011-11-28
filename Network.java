@@ -1,12 +1,19 @@
+/*************************************************************************************
+ * ===================================================================================
+ *
+ * This is the back end. This class stores lists and contains algorithms for computing
+ * Shortest paths, diameter etc.
+ * 
+ * ===================================================================================
+ *************************************************************************************/
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-/*this is intended for omnidirectional networks. Use DirectedNetwork
- * for directed networks.
- */
+
 
 public class Network {
 	ArrayList<Node> sensorlist;
@@ -19,6 +26,12 @@ public class Network {
 	
 	protected StatisticsRunner stats;
 	
+	
+	/**
+	 * CONSTRUCTOR
+	 * @author ugorelik
+	 *
+	 */
 	public Network() {
 		shortestPathList = null;
 		strength = 50;
@@ -26,6 +39,13 @@ public class Network {
 		sensorlist.add(new Node(DEFAULTX, DEFAULTY));
 	}
 
+	
+	/**
+	 * CONSTRUCTOR
+	 * Initializes the strength and the number of nodes
+	 * @author ugorelik
+	 *
+	 */
 	public Network(int n, int s) {
 		int x = 0;
 		strength = s;
@@ -51,17 +71,19 @@ public class Network {
 			}
 			sensorlist.add(newNode);
 		}
+		
+		// TODO: Do we need to call attachNeighbours here?
 	}
 
 	/**
-	 * Method to be called when trying to find the shortest path
+	 * Finds the shortest path between two nodes. Sets a networks 
+	 * shortestPathList variable.
 	 * 
 	 * @param startNode
 	 * @param endNode
-	 * @return
 	 */
 	public void shortestPath(Node startNode, Node endNode) {
-		List<Node> pathedList = dijkstra(sensorlist);
+		List<Node> pathedList = dijkstra(sensorlist, startNode);
 
 		Node end = null;
 
@@ -82,9 +104,12 @@ public class Network {
 
 	}
 
+	
+	
 	/**
+	 * Runs dijkstra's algorithm based on a graph and a startingNode
 	 */
-	public List<Node> dijkstra(ArrayList<Node> graph) {
+	public List<Node> dijkstra(ArrayList<Node> graph, Node sNode) {
 
 		// Set all the nodes to infinity
 		for (Node n : graph) {
@@ -95,7 +120,15 @@ public class Network {
 		Set<Node> visited = new HashSet<Node>();
 		List<Node> unvisited = new ArrayList<Node>();
 
-		Node startNode = graph.get(0);
+		Node startNode = null;
+		
+		if (sNode == null) {
+			graph.get(0);	
+		} else {
+			startNode = sNode;
+		}
+		
+		
 		startNode.setDistance(0);
 		visited.add(startNode);
 		
@@ -134,7 +167,7 @@ public class Network {
 	}
 
 	/**
-	 * Sets the neighbours
+	 * Populates the allEdges list. Run after a network is usually created
 	 */
 	protected void attachNeighbours() {
 
@@ -151,6 +184,12 @@ public class Network {
 		}
 	}
 
+	
+	
+	/*******************************************************************
+	 *		Getters and Setters
+	 *******************************************************************/
+	
 	public ArrayList<Node> getSensorList() {
 		return sensorlist;
 	}

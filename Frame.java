@@ -1,7 +1,14 @@
-/**
- * This is the controller
- */
+/*************************************************************************************
+ * ===================================================================================
+ *
+ * Acts as the CONTROLLER for the program. This is the main JFrame.
+ * 
+ * It houses two panels: 
+ * 
+ * ===================================================================================
+ *************************************************************************************/
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,32 +18,50 @@ import javax.swing.JFrame;
 public class Frame extends JFrame{
 
 	public static final String FRAME_NAME = "3203 - Networking";
-	Network network, directedNetwork;
-	View view;
-	int strength,sensors;
 	
+	Network network;
+	Network directedNetwork;
+	
+	View view;
+	
+	
+	int strength;
+	int sensors;
+	
+	// Statistics frame
 	JFrame statsFrame;
 
+	
+	
 	public final static int WIDTH = 800;
 	public final static int HEIGHT = 580;
 	
 	
+	
+	/**
+	 * CONSTRUCTOR
+	 * @param name - name of the program
+	 */
 	public Frame(String name) {
 		super(name);
 		strength = 50;
 		sensors = 10;
 		
+		// Make a new stats frame
 		statsFrame = new StatsFrame();
-		network = directedNetwork = null;
-
-		// Make sure it exists properly
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
+		network = null;
+		directedNetwork = null;
+		
 		// Add the JPanel
 		view = new View();
 		getContentPane().add(view);
 		
-		//add ActionListeners
+		// Add ActionListeners
+		
+		/*******************************************************************
+		 *		"GO" Button
+		 *******************************************************************/
 		view.getUpdateButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				sensors = view.getSensors();
@@ -44,11 +69,13 @@ public class Frame extends JFrame{
 				update();
 			}
 		});
+		
+		
+		/*******************************************************************
+		 *		Stats Button
+		 *******************************************************************/
 		view.getStatsButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
-				
-				
 				statsWindow();
 			}
 		});
@@ -57,7 +84,6 @@ public class Frame extends JFrame{
 		 *		Shortest Path Button 
 		 *******************************************************************/
 		view.getShortestPathButtong().addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				updateIfNeeded(); // else we get a npe
 				shortestPath();
@@ -65,7 +91,9 @@ public class Frame extends JFrame{
 			}
 		});
 		
-		
+		/*******************************************************************
+		 *		Angle Toggle Button 
+		 *******************************************************************/
 		view.getAngleButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				toggleAngleDisplay();
@@ -74,11 +102,11 @@ public class Frame extends JFrame{
 			
 		});
 
+		// Make sure it exists properly
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		// Size the frame.
 		setSize(WIDTH, HEIGHT);
-//		pack();
-		
-		
 		
 		// Show it.
 		setVisible(true);
@@ -122,17 +150,39 @@ public class Frame extends JFrame{
 		
 	}
 	
+	
+	/**
+	 * The action for the ActionListener that is called when the "SP" button is pressed.
+	 */
 	private void shortestPath() {
-//		Node start = directedNetwork.getSensorList().get(new Random().nextInt(directedNetwork.getSensorList().size()));
-//		Node end = directedNetwork.getSensorList().get(new Random().nextInt(directedNetwork.getSensorList().size()));
-		
 		// Toggle the button
 		view.directedPanel.isDisplayShorestPath = !view.directedPanel.isDisplayShorestPath;
+		
+		// Toggle the buttons color.
+		if (view.directedPanel.isDisplayShorestPath)
+			view.getShortestPathButtong().setBackground(Color.green);
+		else 
+			view.getShortestPathButtong().setBackground(Color.GRAY);
+
+		// Make the view draw the changes
 		view.directedPanel.repaint();
 	}
 	
 	
+	
+	/**
+	 * The action for the ActionListener that is called when the "Angle" button is pressed.
+	 * The button color is toggled to Color.GREEN and then back to white.
+	 * 
+	 * This turns on and off the "arcs" for the sensors
+	 */
 	private void toggleAngleDisplay() {
+		
+		if (view.directedPanel.displayAngles)
+			view.getAngleButton().setBackground(Color.green);
+		else 
+			view.getAngleButton().setBackground(Color.white);
+		
 		view.directedPanel.displayAngles = !view.directedPanel.displayAngles;
 		view.directedPanel.repaint();
 	}

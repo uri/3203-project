@@ -1,3 +1,11 @@
+/*************************************************************************************
+ * ===================================================================================
+ *
+ * A GraphPanel is added to the main JFrame, it displays the graphs themselves
+ * 
+ * ===================================================================================
+ *************************************************************************************/
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,15 +33,29 @@ public class GraphPanel extends JPanel {
 		displayAngles = true;
 	}
 	
+	
+	/**
+	 * TODO: Is this ever called?
+	 * @param n
+	 */
 	public void DrawNetwork(Network n){
 		network = n;
 		repaint();
-	};
+	}
 	
+	
+	
+	/**
+	 * TODO: Is this ever called?
+	 */
 	public void drawDirectedNetwork(){
 		
 	}
 	
+	
+	/**
+	 * Swings paint method. This is where the drawing is done for the graphs.
+	 */
 	public void paint(Graphics graph){
 		super.paint(graph);
 		Graphics2D g = (Graphics2D)graph;

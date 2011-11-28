@@ -1,7 +1,13 @@
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+/*************************************************************************************
+ * ===================================================================================
+ * 
+ * This is the frame that pops up when the user hits the Stats button.
+ * It displays usefull information about the program. 
+ * 
+ * Uses StatisticsRunner
+ * 
+ * ===================================================================================
+ *************************************************************************************/
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -11,8 +17,15 @@ public class StatsFrame extends JFrame{
 	public static final int STATS_HEIGHT = 400;
 	public static final int STATS_WIDTH = 400;
 	
+	StatisticsRunner stats;
+	
+	/**
+	 * 
+	 */
 	public StatsFrame() {
 		super("Statistics");
+		
+		
 		setLayout(null);
 
 		// Size
@@ -31,12 +44,9 @@ public class StatsFrame extends JFrame{
 		getContentPane().add(label);
 		
 
-		// Add the JPanel
-//		getContentPane().add(view);
 		
-		
-
-		// Size the frame.
+		// Get the statistics class
+		this.stats = stats;
 		
 
 	}

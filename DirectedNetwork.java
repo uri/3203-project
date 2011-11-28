@@ -1,8 +1,22 @@
+/*************************************************************************************
+ * ===================================================================================
+ *
+ * A DirectedNetwork extends a Network. It is used to different from the standard
+ * network.
+ * 
+ * ===================================================================================
+ *************************************************************************************/
+
 import java.util.ArrayList;
 
 
 public class DirectedNetwork extends Network{
 	
+	
+	/**
+	 * Constructor for the Directed Network
+	 * @param n
+	 */
 	public DirectedNetwork(Network n){
 		sensorlist = new ArrayList<Node>();
 		//copy relevant data from the base network
@@ -21,6 +35,12 @@ public class DirectedNetwork extends Network{
 		UpdateAllEdges();
 	}
 	
+	
+	
+	/**
+	 * Goes through each node of the sensor list - then goes through every edge (non-mst)
+	 * and checks if they are still supposed to be neighbouring. 
+	 */
 	public void UpdateAllEdges(){
 		for (Node n: sensorlist){
 			for (int i = 0; i < n.getAllEdges().size();i++){
@@ -33,6 +53,10 @@ public class DirectedNetwork extends Network{
 		}
 	}
 	
+	
+	/**
+	 * Prim's algorithm
+	 */
 	public void MinimalSpanning(){
 		int smallestDistance;
 		Node origin = new Node();
@@ -57,7 +81,9 @@ public class DirectedNetwork extends Network{
 		}
 	}
 	
-	//Eric's Algorithm
+	/**
+	 * Orients the antenas
+	 */
 	public void AntennaOrientation(){
 		for (Node n: sensorlist){
 			//System.out.println("SENSOR LIST. This node has " + n.getMSTEdges().size() + " edges and " + n.getAllEdges().size() + " neighbours" );

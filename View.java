@@ -1,3 +1,12 @@
+/*************************************************************************************
+ * ===================================================================================
+ *
+ * This is the main view of the program. It is the main object added to the main
+ * JFrame.
+ * 
+ * ===================================================================================
+ *************************************************************************************/
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +26,9 @@ public class View extends JPanel{
     JButton shortestPathButton;
     JButton angleButton;
 	
+	/**
+	 * 
+	 */
 	public View(){
 		setLayout(null);
 		
@@ -36,12 +48,21 @@ public class View extends JPanel{
 		repaint();
 	}
 	
+	/**
+	 * @param omni
+	 * @param directed
+	 */
 	public void updateNetwork (Network omni, Network directed){
 		omniPanel.DrawNetwork(omni);
 		directedPanel.DrawNetwork(directed);
 		repaint();
 	}
-	//this is some bad programming technique. I can saw that cause it's my code
+	
+	
+	
+	/**
+	 * @return
+	 */
 	public JPanel createBasePanel(){
 		JPanel result = new JPanel();
 		result.setLayout(null);
@@ -91,20 +112,34 @@ public class View extends JPanel{
 		return result;
 	}
 	
-	//this will be updated to add in labeled fields. Like above, but less tedious
+	/**
+	 * TODO: This needs to be updated to add in labeled fields. Like above, but less tedious
+	 * @param s
+	 * @param x
+	 * @return
+	 */
 	public JPanel LabeledField(String s, int x){
 		JPanel result = new JPanel();
 		return result;
 	}
 	
+	/**
+	 * @return
+	 */
 	public JButton getUpdateButton(){
 		return updateButton;
 	}
 	
+	/**
+	 * @return
+	 */
 	public JButton getStatsButton(){
 		return statsButton;
 	};
 	
+	/**
+	 * @return
+	 */
 	public int getSensors(){
 		int x = Integer.parseInt(sensorsField.getText());
 /*		if (x < 10){
@@ -116,6 +151,9 @@ public class View extends JPanel{
 		return Integer.parseInt(sensorsField.getText());
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getStrength(){
 		int x = Integer.parseInt(strengthField.getText());
 		if (x < 50)
@@ -125,17 +163,29 @@ public class View extends JPanel{
 		return Integer.parseInt(strengthField.getText());
 	}
 
+	/**
+	 * @return
+	 */
 	public JButton getShortestPathButtong() {
 		return shortestPathButton;
 	}
 
+	/**
+	 * @return
+	 */
 	public JButton getAngleButton() {
 		return angleButton;
 	}
 
+	/**
+	 * @param angleButton
+	 */
 	public void setAngleButton(JButton angleButton) {
 		this.angleButton = angleButton;
 	}
+	
+	
+	
 	
 	//this is for testing the appearance of the view.
 /*	public static void main(String args[]){
