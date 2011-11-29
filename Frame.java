@@ -45,9 +45,14 @@ public class Frame extends JFrame{
 	 */
 	public Frame(String name) {
 		super(name);
+		
 		strength = 50;
 		sensors = 10;
-		
+
+		// Show it.
+		setVisible(true);
+
+		// Make the stats frame
 		statsFrame = new StatsFrame();
 		
 		network = null;
@@ -108,8 +113,6 @@ public class Frame extends JFrame{
 		// Size the frame.
 		setSize(WIDTH, HEIGHT);
 		
-		// Show it.
-		setVisible(true);
 	}
 	
 	private void updateIfNeeded() {
@@ -128,23 +131,14 @@ public class Frame extends JFrame{
 		directedNetwork.shortestPath(start, end);
 		
 		// Update the stats pane
-		
-		
-		// For now I'm just jamming this stuff in here. I'll get it in its own window eventually :)
-//		int numberOfNetworks = 50;
-//		int numberOfNodes = 12;
-//		int signalStrength = 50;
-		
-		
 		if (statsFrame.isVisible()) {
-			int numberOfNetworks = 50;
+			int numberOfNetworks = statsFrame.getNetworkNum();
 			int numberOfNodes = sensors;
 			int signalStrength = strength;
 			StatisticsRunner stats = new StatisticsRunner(numberOfNetworks, numberOfNodes, signalStrength);
 			
 			statsFrame.setStatisticsRunner(stats);
 			statsFrame.update();	
-				
 		}
 		
 		
@@ -159,6 +153,7 @@ public class Frame extends JFrame{
 			statsFrame.setVisible(false);
 		} else {
 			statsFrame.setVisible(true);
+			statsFrame.setLocation(this.getLocationOnScreen().x + WIDTH, this.getLocationOnScreen().y);
 		}
 		
 		
