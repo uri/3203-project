@@ -6,8 +6,8 @@
  * ===================================================================================
  *************************************************************************************/
 
-import java.awt.image.SinglePixelPackedSampleModel;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,7 +21,6 @@ public class StatisticsRunner {
 
 	// Statistics
 	protected int numNodes;
-	protected int numNetworks;
 	
 	// Run times
 	
@@ -30,7 +29,21 @@ public class StatisticsRunner {
 	protected double rtDiameter;
 	protected double rtHops;
 	
+	protected double omniRTShortestPath;
+	protected double omniRTDiameter;
+	protected double omniRTHops;
+	
+	
+	protected double averageShortest;
+	protected double averageDiameter;
+	protected double averageLength;
+	
+	protected double omniAverageShortest;
+	protected double omniAverageDiameter;
+	protected double omniAverageLength;
+	
 	// Static stuff.
+	protected float angle;
 	protected float strength;
 	
 	
@@ -56,15 +69,31 @@ public class StatisticsRunner {
 			listOfDirectedNetworks.add(directedNet);
 		}
 		
+		this.setNumNodes(numberOfNodesPerNetwork);
 		
 		// compute the stats for the directed network
-		this.setRtDiameter(averageDiameterOfDirectedNetworks());
-		this.setRtShortestPath(averageOfShortestPathsForNetwork(listOfDirectedNetworks));
-		this.setRtHops(averageLengthOfNetworkList(listOfDirectedNetworks));
+		long startTime = System.currentTimeMillis();
+		this.setAverageDiameter(averageDiameterOfNetworks(listOfDirectedNetworks));
+		long endTime = System.currentTimeMillis();
+		this.setRtDiameter((double)(endTime - startTime));
 		
-		strength = signalStrength;
-		numNodes = numberOfNodesPerNetwork;
-		numNetworks = numberOfNetworks;
+		// omnidirectional network
+		startTime = System.currentTimeMillis();
+		this.setAverageDiameter(averageDiameterOfNetworks(listOfNetworks));
+		endTime = System.currentTimeMillis();
+		this.setOmniRTDiameter((double)(endTime - startTime));
+
+		
+		startTime = System.currentTimeMillis();
+		this.setAverageShortest(averageOfShortestPathsForNetwork(listOfDirectedNetworks));
+		endTime = System.currentTimeMillis();
+		this.setRtShortestPath((double)(endTime - startTime));
+		
+		
+		startTime = System.currentTimeMillis();
+		this.setAverageLength(averageLengthOfNetworkList(listOfDirectedNetworks));
+		endTime = System.currentTimeMillis();
+		this.setRtHops((double)(endTime - startTime));
 		
 	}
 	
@@ -102,18 +131,18 @@ public class StatisticsRunner {
 	public void diameterOfNetwork() {
 
 		System.out.println("Going to get the average diameter of " + listOfDirectedNetworks.size() + " directed networks");
-		System.out.println("Done.. the average was: " + averageDiameterOfDirectedNetworks());
+		//System.out.println("Done.. the average was: " + averageDiameterOfNetworks());
 		
 	}
 	
 	
-	private double averageDiameterOfDirectedNetworks() {
+	private double averageDiameterOfNetworks(ArrayList<? extends Network> networks) {
 		// find the shortest paths between every pair of nodes in the network
 		// then pick the longest one.
 		// that's the diameter
 		// c.f. http://stackoverflow.com/questions/3174569/what-is-meant-by-diameter-of-a-network
 		int runningTotalOfNetworkDiameters = 0;
-		for (Network net : listOfDirectedNetworks) {
+		for (Network net : networks) {
 			
 			int currentLongestPath = 0;
 			for (Node startNode : net.getSensorList()) {
@@ -131,11 +160,11 @@ public class StatisticsRunner {
 				}
 			}
 			
-			System.out.println("The longest shortest path for this network is: " + currentLongestPath);
+			
 			runningTotalOfNetworkDiameters += currentLongestPath;
 		}
 		
-		return (double)runningTotalOfNetworkDiameters/(double)listOfDirectedNetworks.size();
+		return (double)runningTotalOfNetworkDiameters/(double)networks.size();
 	}
 	
 	public void lengthOfRoutes() {
@@ -226,6 +255,13 @@ public class StatisticsRunner {
 	public void setNumNodes(int numNodes) {
 		this.numNodes = numNodes;
 	}
+	
+	
+	public int getNumNetworks() {
+		return listOfNetworks.size();
+	}
+	
+	
 
 
 	/**
@@ -277,6 +313,166 @@ public class StatisticsRunner {
 
 
 	/**
+	 * @return the averageShortest
+	 */
+	public double getAverageShortest() {
+		return averageShortest;
+	}
+
+
+	/**
+	 * @param averageShortest the averageShortest to set
+	 */
+	public void setAverageShortest(double averageShortest) {
+		this.averageShortest = averageShortest;
+	}
+
+
+	/**
+	 * @return the averageDiameter
+	 */
+	public double getAverageDiameter() {
+		return averageDiameter;
+	}
+
+
+	/**
+	 * @param averageDiameter the averageDiameter to set
+	 */
+	public void setAverageDiameter(double averageDiameter) {
+		this.averageDiameter = averageDiameter;
+	}
+
+
+	/**
+	 * @return the averageLength
+	 */
+	public double getAverageLength() {
+		return averageLength;
+	}
+
+
+	/**
+	 * @param averageLength the averageLength to set
+	 */
+	public void setAverageLength(double averageLength) {
+		this.averageLength = averageLength;
+	}
+
+
+	/**
+	 * @return the omniRTShortestPath
+	 */
+	public double getOmniRTShortestPath() {
+		return omniRTShortestPath;
+	}
+
+
+	/**
+	 * @param omniRTShortestPath the omniRTShortestPath to set
+	 */
+	public void setOmniRTShortestPath(double omniRTShortestPath) {
+		this.omniRTShortestPath = omniRTShortestPath;
+	}
+
+
+	/**
+	 * @return the omniRTDiameter
+	 */
+	public double getOmniRTDiameter() {
+		return omniRTDiameter;
+	}
+
+
+	/**
+	 * @param omniRTDiameter the omniRTDiameter to set
+	 */
+	public void setOmniRTDiameter(double omniRTDiameter) {
+		this.omniRTDiameter = omniRTDiameter;
+	}
+
+
+	/**
+	 * @return the omniRTHops
+	 */
+	public double getOmniRTHops() {
+		return omniRTHops;
+	}
+
+
+	/**
+	 * @param omniRTHops the omniRTHops to set
+	 */
+	public void setOmniRTHops(double omniRTHops) {
+		this.omniRTHops = omniRTHops;
+	}
+
+
+	/**
+	 * @return the omniAverageShortest
+	 */
+	public double getOmniAverageShortest() {
+		return omniAverageShortest;
+	}
+
+
+	/**
+	 * @param omniAverageShortest the omniAverageShortest to set
+	 */
+	public void setOmniAverageShortest(double omniAverageShortest) {
+		this.omniAverageShortest = omniAverageShortest;
+	}
+
+
+	/**
+	 * @return the omniAverageDiameter
+	 */
+	public double getOmniAverageDiameter() {
+		return omniAverageDiameter;
+	}
+
+
+	/**
+	 * @param omniAverageDiameter the omniAverageDiameter to set
+	 */
+	public void setOmniAverageDiameter(double omniAverageDiameter) {
+		this.omniAverageDiameter = omniAverageDiameter;
+	}
+
+
+	/**
+	 * @return the omniAverageLength
+	 */
+	public double getOmniAverageLength() {
+		return omniAverageLength;
+	}
+
+
+	/**
+	 * @param omniAverageLength the omniAverageLength to set
+	 */
+	public void setOmniAverageLength(double omniAverageLength) {
+		this.omniAverageLength = omniAverageLength;
+	}
+
+
+	/**
+	 * @return
+	 */
+	public float getAngle() {
+		return angle;
+	}
+
+
+	/**
+	 * @param angle
+	 */
+	public void setAngle(float angle) {
+		this.angle = angle;
+	}
+
+
+	/**
 	 * @return
 	 */
 	public float getStrength() {
@@ -289,16 +485,6 @@ public class StatisticsRunner {
 	 */
 	public void setStrength(float strength) {
 		this.strength = strength;
-	}
-
-
-	public int getNumNetworks() {
-		return numNetworks;
-	}
-
-
-	public void setNumNetworks(int numNetworks) {
-		this.numNetworks = numNetworks;
 	}
 	
 	
