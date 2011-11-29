@@ -21,6 +21,7 @@ public class StatisticsRunner {
 
 	// Statistics
 	protected int numNodes;
+	protected int numNetworks;
 	
 	// Run times
 	
@@ -63,6 +64,7 @@ public class StatisticsRunner {
 		
 		strength = signalStrength;
 		numNodes = numberOfNodesPerNetwork;
+		numNetworks = numberOfNetworks;
 		
 	}
 	
@@ -287,6 +289,16 @@ public class StatisticsRunner {
 	 */
 	public void setStrength(float strength) {
 		this.strength = strength;
+	}
+
+
+	public int getNumNetworks() {
+		return numNetworks;
+	}
+
+
+	public void setNumNetworks(int numNetworks) {
+		this.numNetworks = numNetworks;
 	}
 	
 	

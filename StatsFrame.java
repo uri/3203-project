@@ -32,6 +32,8 @@ public class StatsFrame extends JFrame{
 	JLabel  rtHops;
 	JLabel  angle;
 	JLabel  strength;
+	JLabel 	numNetworks;
+	JLabel 	totalNumberNodes;
 	
 	/**
 	 * 
@@ -59,6 +61,10 @@ public class StatsFrame extends JFrame{
 		addLabel("Hops T", 0*LABEL_WIDTH , 4 * LABEL_HEIGHT );
 		
 		addLabel("Strength", 0*LABEL_WIDTH , 5 * LABEL_HEIGHT );
+		addLabel("Num Networks", 0*LABEL_WIDTH , 6 * LABEL_HEIGHT );
+		
+		addLabel("Strength", 0*LABEL_WIDTH , 5 * LABEL_HEIGHT );
+		addLabel("Total Nodes", 0*LABEL_WIDTH , 7 * LABEL_HEIGHT );
 		
 		initDisplayLabels();
 
@@ -75,6 +81,8 @@ public class StatsFrame extends JFrame{
 		rtDiameter.setText(""+stats.getRtDiameter());
 		rtHops.setText(""+stats.getRtHops());
 		strength.setText(""+stats.getStrength());
+		numNetworks.setText(""+stats.getNumNetworks());
+		totalNumberNodes.setText(""+ (stats.getNumNodes() * stats.getNumNetworks()));
 	}
 	
 
@@ -105,6 +113,12 @@ public class StatsFrame extends JFrame{
 		
 		strength = new JLabel("0");
 		addLabel(strength, 1*LABEL_WIDTH , 5 * LABEL_HEIGHT );
+		
+		numNetworks = new JLabel("0");
+		addLabel(numNetworks, 1*LABEL_WIDTH , 6 * LABEL_HEIGHT );
+		
+		totalNumberNodes = new JLabel("0");
+		addLabel(totalNumberNodes, 1*LABEL_WIDTH , 7 * LABEL_HEIGHT );
 	}
 
 	public void setStatisticsRunner(StatisticsRunner stats) {
