@@ -34,8 +34,8 @@ public class Frame extends JFrame{
 
 	
 	
-	public final static int WIDTH = 800;
-	public final static int HEIGHT = 580;
+	public final static int WIDTH = 1100;
+	public final static int HEIGHT = 680;
 	
 	
 	

@@ -43,16 +43,6 @@ public class GraphPanel extends JPanel {
 		repaint();
 	}
 	
-	
-	
-	/**
-	 * TODO: Is this ever called?
-	 */
-	public void drawDirectedNetwork(){
-		
-	}
-	
-	
 	/**
 	 * Swings paint method. This is where the drawing is done for the graphs.
 	 */
@@ -65,7 +55,10 @@ public class GraphPanel extends JPanel {
 		// Display the angles/arcs
 		if (displayAngles) {
 			for (Node s : network.getSensorList()){
-				temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
+				if(s.getAngle() == 360)
+					g.draw(new Ellipse2D.Double(s.getX()-network.strength,s.getY()-network.strength,2*network.strength,2*network.strength));
+				else
+					temp.setArcByCenter(s.getX(), s.getY(), network.strength, s.getDirection(),s.getAngle(), Arc2D.PIE);
 				g.draw(temp);
 			}
 				
@@ -76,9 +69,6 @@ public class GraphPanel extends JPanel {
 			g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
 		}
 		
-		
-		
-		//System.out.println("\nNew Batch");
 		for (Node s: network.getSensorList()){
 			for (Node n: s.getAllEdges()){
 //				g.setColor(Color.BLUE);
