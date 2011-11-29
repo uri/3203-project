@@ -6,6 +6,7 @@
  * ===================================================================================
  *************************************************************************************/
 
+import java.awt.image.SinglePixelPackedSampleModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class StatisticsRunner {
 	protected double rtHops;
 	
 	// Static stuff.
-	protected float angle;
 	protected float strength;
 	
 	
@@ -60,6 +60,9 @@ public class StatisticsRunner {
 		this.setRtDiameter(averageDiameterOfDirectedNetworks());
 		this.setRtShortestPath(averageOfShortestPathsForNetwork(listOfDirectedNetworks));
 		this.setRtHops(averageLengthOfNetworkList(listOfDirectedNetworks));
+		
+		strength = signalStrength;
+		numNodes = numberOfNodesPerNetwork;
 		
 	}
 	
@@ -268,22 +271,6 @@ public class StatisticsRunner {
 	 */
 	public void setRtHops(double rtHops) {
 		this.rtHops = rtHops;
-	}
-
-
-	/**
-	 * @return
-	 */
-	public float getAngle() {
-		return angle;
-	}
-
-
-	/**
-	 * @param angle
-	 */
-	public void setAngle(float angle) {
-		this.angle = angle;
 	}
 
 

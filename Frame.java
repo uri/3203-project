@@ -128,6 +128,15 @@ public class Frame extends JFrame{
 		directedNetwork.shortestPath(start, end);
 		
 		// Update the stats pane
+		
+		
+		// For now I'm just jamming this stuff in here. I'll get it in its own window eventually :)
+		int numberOfNetworks = 50;
+		int numberOfNodes = 12;
+		int signalStrength = 50;
+		StatisticsRunner stats = new StatisticsRunner(numberOfNetworks, numberOfNodes, signalStrength);
+		
+		statsFrame.setStatisticsRunner(stats);
 		statsFrame.update();	
 		
 		
@@ -136,19 +145,6 @@ public class Frame extends JFrame{
 	private void statsWindow(){
 		//this is a stub! It should display a window and stats and stuff.
 		System.out.println("Stats!");
-		
-		// For now I'm just jamming this stuff in here. I'll get it in its own window eventually :)
-		int numberOfNetworks = 50;
-		int numberOfNodes = 12;
-		int signalStrength = 50;
-		StatisticsRunner stats = new StatisticsRunner(numberOfNetworks, numberOfNodes, signalStrength);
-		
-//		stats.shortestPaths();
-//		stats.diameterOfNetwork();
-//		stats.lengthOfRoutes();
-		
-		statsFrame.setStatisticsRunner(stats);
-		
 		
 		// Toggle the frame
 		if (statsFrame.isVisible()) {

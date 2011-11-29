@@ -58,8 +58,7 @@ public class StatsFrame extends JFrame{
 		addLabel("Diamter T", 0*LABEL_WIDTH , 3 * LABEL_HEIGHT );
 		addLabel("Hops T", 0*LABEL_WIDTH , 4 * LABEL_HEIGHT );
 		
-		addLabel("Angle", 0*LABEL_WIDTH , 5 * LABEL_HEIGHT );
-		addLabel("Strength", 0*LABEL_WIDTH , 6 * LABEL_HEIGHT );
+		addLabel("Strength", 0*LABEL_WIDTH , 5 * LABEL_HEIGHT );
 		
 		initDisplayLabels();
 
@@ -75,7 +74,6 @@ public class StatsFrame extends JFrame{
 		rtShortestPath.setText(""+stats.getRtShortestPath());
 		rtDiameter.setText(""+stats.getRtDiameter());
 		rtHops.setText(""+stats.getRtHops());
-		angle.setText(""+stats.getAngle());
 		strength.setText(""+stats.getStrength());
 	}
 	
@@ -104,11 +102,9 @@ public class StatsFrame extends JFrame{
 		rtHops = new JLabel("0");
 		addLabel(rtHops, 1*LABEL_WIDTH , 4 * LABEL_HEIGHT );
 		
-		angle = new JLabel("0");
-		addLabel(angle, 1*LABEL_WIDTH , 5 * LABEL_HEIGHT );
 		
 		strength = new JLabel("0");
-		addLabel(strength, 1*LABEL_WIDTH , 6 * LABEL_HEIGHT );
+		addLabel(strength, 1*LABEL_WIDTH , 5 * LABEL_HEIGHT );
 	}
 
 	public void setStatisticsRunner(StatisticsRunner stats) {
