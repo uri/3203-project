@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-public class StatsPanel extends JFrame{
+public class StatsFrame extends JFrame{
 	
 	public static final int STATS_HEIGHT = 400;
 	public static final int STATS_WIDTH = 400;
@@ -36,7 +36,7 @@ public class StatsPanel extends JFrame{
 	/**
 	 * 
 	 */
-	public StatsPanel() {
+	public StatsFrame() {
 		super("Statistics");
 		setLayout(null);
 		

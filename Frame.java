@@ -29,7 +29,7 @@ public class Frame extends JFrame{
 	int sensors;
 	
 	// Statistics frame
-	StatsPanel statsFrame;
+	StatsFrame statsFrame;
 	
 
 	
@@ -48,7 +48,7 @@ public class Frame extends JFrame{
 		strength = 50;
 		sensors = 10;
 		
-		statsFrame = new StatsPanel();
+		statsFrame = new StatsFrame();
 		
 		network = null;
 		directedNetwork = null;
@@ -124,7 +124,7 @@ public class Frame extends JFrame{
 		
 		// Shortest path
 		Node start = directedNetwork.getSensorList().get(0);
-		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() - 1);
+		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() -1);
 		directedNetwork.shortestPath(start, end);
 		
 		// Update the stats pane

@@ -72,7 +72,7 @@ public class View extends JPanel{
 		sensorsLabel.setLocation(10,0);
 		result.add(sensorsLabel);
 		
-		sensorsField = new JTextField("2");
+		sensorsField = new JTextField("30");
 		sensorsField.setLocation(10,TEXT_HEIGHT);
 		sensorsField.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		result.add(sensorsField);

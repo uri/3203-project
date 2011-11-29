@@ -83,6 +83,18 @@ public class Network {
 	 * @param endNode
 	 */
 	public void shortestPath(Node startNode, Node endNode) {
+		
+		// TEMP FIX
+		startNode.setPredecessor(null);
+		
+		shortestPathList = new ArrayList<Node>();
+		
+		// Check if we're checking the same node
+		if(startNode.equals(endNode)) {
+			shortestPathList.add(startNode);
+			return;
+		}
+		
 		List<Node> pathedList = dijkstra(sensorlist, startNode);
 
 		Node end = null;
@@ -93,7 +105,7 @@ public class Network {
 				end = n;
 		}
 
-		shortestPathList = new ArrayList<Node>();
+		
 		//System.out.println("This is the weight to the last node: "
 		//		+ pathedList.get(pathedList.size() - 1).getDistance());
 		do {
@@ -151,6 +163,8 @@ public class Network {
 					// update it.
 					if (distanceTo < edge.getDistance()) {
 						edge.setDistance(distanceTo);
+						
+						// Set it to the node we went through
 						edge.setPredecessor(cur);
 					}
 
