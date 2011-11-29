@@ -74,8 +74,6 @@ public class Frame extends JFrame{
 				update();
 			}
 		});
-		
-		
 		/*******************************************************************
 		 *		Stats Button
 		 *******************************************************************/
@@ -84,7 +82,6 @@ public class Frame extends JFrame{
 				statsWindow();
 			}
 		});
-		
 		/*******************************************************************
 		 *		Shortest Path Button 
 		 *******************************************************************/
@@ -92,10 +89,8 @@ public class Frame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				updateIfNeeded(); // else we get a npe
 				shortestPath();
-				
 			}
 		});
-		
 		/*******************************************************************
 		 *		Angle Toggle Button 
 		 *******************************************************************/
@@ -103,16 +98,11 @@ public class Frame extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				toggleAngleDisplay();
 			}
-
-			
 		});
-
 		// Make sure it exists properly
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		// Size the frame.
 		setSize(WIDTH, HEIGHT);
-		
 	}
 	
 	private void updateIfNeeded() {
@@ -124,12 +114,10 @@ public class Frame extends JFrame{
 		network = new Network(sensors, strength);
 		directedNetwork = new DirectedNetwork(network);
 		view.updateNetwork(network, directedNetwork);
-		
 		// Shortest path
 		Node start = directedNetwork.getSensorList().get(0);
 		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() -1);
 		directedNetwork.shortestPath(start, end);
-		
 		// Update the stats pane
 		if (statsFrame.isVisible()) {
 			int numberOfNetworks = statsFrame.getNetworkNum();
@@ -155,10 +143,7 @@ public class Frame extends JFrame{
 			statsFrame.setVisible(true);
 			statsFrame.setLocation(this.getLocationOnScreen().x + WIDTH, this.getLocationOnScreen().y);
 		}
-		
-		
 	}
-	
 	
 	/**
 	 * The action for the ActionListener that is called when the "SP" button is pressed.
@@ -194,6 +179,8 @@ public class Frame extends JFrame{
 		
 		view.directedPanel.displayAngles = !view.directedPanel.displayAngles;
 		view.directedPanel.repaint();
+		view.omniPanel.displayAngles = !view.omniPanel.displayAngles;
+		view.omniPanel.repaint();
 	}
 	
 	public static void main(String [] args){

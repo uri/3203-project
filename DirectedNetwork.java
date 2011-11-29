@@ -53,7 +53,6 @@ public class DirectedNetwork extends Network{
 		}
 	}
 	
-	
 	/**
 	 * Prim's algorithm
 	 */
@@ -116,8 +115,6 @@ public class DirectedNetwork extends Network{
 			}
 		}
 	}
-	
-
 }
 
 

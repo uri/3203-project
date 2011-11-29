@@ -21,10 +21,7 @@ public class View extends JPanel{
     GraphPanel omniPanel, directedPanel;
 	JPanel statsPanel;
     JTextField sensorsField, strengthField;
-    JButton updateButton,statsButton;
-    
-    JButton shortestPathButton;
-    JButton angleButton;
+    JButton updateButton,statsButton,shortestPathButton,angleButton,edgeButton;
 	
 	/**
 	 * 
@@ -103,11 +100,16 @@ public class View extends JPanel{
 		shortestPathButton.setLocation(10+FIELD_WIDTH*5,TEXT_HEIGHT);
 		result.add(shortestPathButton);
 		
-		// Adding the Shortest Path button
+		// Adding the Angle button
 		angleButton = new JButton("Angle");
 		angleButton.setSize(100,TEXT_HEIGHT);
 		angleButton.setLocation(10+FIELD_WIDTH*6,TEXT_HEIGHT);
 		result.add(angleButton);
+		//adding the Edges Button
+		edgeButton = new JButton("Edges");
+		edgeButton.setSize(100,TEXT_HEIGHT);
+		edgeButton.setLocation(10+FIELD_WIDTH*7,TEXT_HEIGHT);
+		result.add(edgeButton);
 		
 		return result;
 	}

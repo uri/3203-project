@@ -72,7 +72,7 @@ public class Network {
 			sensorlist.add(newNode);
 		}
 		
-		// TODO: Do we need to call attachNeighbours here?
+		attachNeighbours();
 	}
 
 	/**
@@ -173,9 +173,7 @@ public class Network {
 			}
 			visited.add(cur);
 			unvisited.remove(cur);
-
 		}
-
 		return new ArrayList<Node>(visited);
 	}
 
