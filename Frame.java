@@ -175,7 +175,7 @@ public class Frame extends JFrame{
 		if (view.directedPanel.displayAngles)
 			view.getAngleButton().setBackground(Color.green);
 		else 
-			view.getAngleButton().setBackground(Color.white);
+			view.getAngleButton().setBackground(Color.GRAY);
 		
 		view.directedPanel.displayAngles = !view.directedPanel.displayAngles;
 		view.directedPanel.repaint();
