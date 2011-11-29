@@ -142,12 +142,12 @@ public class View extends JPanel{
 	 */
 	public int getSensors(){
 		int x = Integer.parseInt(sensorsField.getText());
-/*		if (x < 10){
+		if (x < 10){
 			sensorsField.setText("10");
 		}
 		else if (x > 100){
 			sensorsField.setText("100");
-		}*/
+		}
 		return Integer.parseInt(sensorsField.getText());
 	}
 	
