@@ -47,6 +47,7 @@ public class StatisticsRunner {
 	// Static stuff.
 	protected float angle;
 	protected float strength;
+	protected int averageAngle;
 	
 	
 	
@@ -113,6 +114,25 @@ public class StatisticsRunner {
 		endTime = System.currentTimeMillis();
 		this.setOmniRTHops((double)(endTime - startTime));
 		
+	}
+	
+	/**
+	 * @return
+	 */
+	public int getAverageAngle(ArrayList<DirectedNetwork> nets) {
+		
+		int totalNodes = 0;
+		
+		for (DirectedNetwork net:nets) {
+			for (Node n : net.getSensorList()) {
+				averageAngle += n.getAngle();
+				totalNodes++;
+			}
+		}
+		
+		averageAngle /= totalNodes;
+		
+		return averageAngle;
 	}
 	
 	
