@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import org.omg.CORBA.OMGVMCID;
+
 // The controller
 public class Frame extends JFrame{
 
@@ -124,10 +126,16 @@ public class Frame extends JFrame{
 		network = new Network(sensors, strength);
 		directedNetwork = new DirectedNetwork(network);
 		view.updateNetwork(network, directedNetwork);
+		
+		
 		// Shortest path
 		Node start = directedNetwork.getSensorList().get(0);
 		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() -1);
 		directedNetwork.shortestPath(start, end);
+		
+		// Diameter
+		directedNetwork.diameterPathList();
+		
 		// Update the stats pane
 		if (statsFrame.isVisible()) {
 			int numberOfNetworks = statsFrame.getNetworkNum();
@@ -160,10 +168,10 @@ public class Frame extends JFrame{
 	 */
 	private void shortestPath() {
 		// Toggle the button
-		view.directedPanel.isDisplayShorestPath = !view.directedPanel.isDisplayShorestPath;
+		view.directedPanel.displayshortestPath = !view.directedPanel.displayshortestPath;
 		
 		// Toggle the buttons color.
-		if (view.directedPanel.isDisplayShorestPath)
+		if (view.directedPanel.displayshortestPath)
 			view.getShortestPathButtong().setBackground(Color.green);
 		else 
 			view.getShortestPathButtong().setBackground(Color.GRAY);
@@ -197,8 +205,19 @@ public class Frame extends JFrame{
 		view.omniPanel.displayEdges =!view.omniPanel.displayEdges;
 		view.repaint();
 	}
+	
+	
 	private void toggleDiameterDisplay(){
-		return;
+		
+		if (view.directedPanel.displayDiameter)
+			view.getDiameterButton().setBackground(Color.GRAY);
+		else 
+			view.getDiameterButton().setBackground(Color.green);
+		
+		view.directedPanel.displayDiameter = !view.directedPanel.displayDiameter;
+		view.omniPanel.displayDiameter = !view.omniPanel.displayDiameter;
+		view.repaint();
+		
 	}
 	
 	public static void main(String [] args){

@@ -136,6 +136,8 @@ public class Network {
 			}
 		}
 		
+		diameterPathList = new ArrayList<Node>();
+		
 		do {
 			diameterPathList.add(endNode);
 			endNode = endNode.getPredecessor();

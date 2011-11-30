@@ -19,8 +19,7 @@ import javax.swing.JPanel;
 public class GraphPanel extends JPanel {
 	
 	Network network;
-	public boolean isDisplayShorestPath;
-	public boolean displayAngles,displayEdges;
+	public boolean displayAngles,displayEdges,displayDiameter,displayshortestPath;
 	
 	public GraphPanel() {
 		setLayout(null);
@@ -29,8 +28,10 @@ public class GraphPanel extends JPanel {
 		inventoryLabel.setSize(60,10);
 		inventoryLabel.setLocation(10,0);
 		add(inventoryLabel);
-		isDisplayShorestPath = false;
+		
 		displayAngles = true;
+		displayshortestPath = false;
+		displayDiameter = false;
 		displayEdges = false;
 	}
 	
@@ -87,11 +88,23 @@ public class GraphPanel extends JPanel {
 			}
 		}
 		// Draw the shortest path
-		if (network.getShortestPathList() != null && isDisplayShorestPath) {
+		if (network.getShortestPathList() != null && displayshortestPath) {
 			g.setColor(Color.GREEN);
 			for (int i = 0; i < network.getShortestPathList().size() - 1; i++) {
 				Node n1 = network.getShortestPathList().get(i);
 				Node n2 = network.getShortestPathList().get(i + 1);
+				
+				g.draw(new Line2D.Double(n1.getX(),n1.getY(),n2.getX(),n2.getY()));
+			}
+		}
+		
+		
+		// Draw the diameter
+		if (network.diameterPathList != null && displayDiameter) {
+			g.setColor(Color.ORANGE);
+			for (int i = 0; i < network.diameterPathList.size() - 1; i++) {
+				Node n1 = network.diameterPathList.get(i);
+				Node n2 = network.diameterPathList.get(i + 1);
 				
 				g.draw(new Line2D.Double(n1.getX(),n1.getY(),n2.getX(),n2.getY()));
 			}
