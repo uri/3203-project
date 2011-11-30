@@ -30,9 +30,11 @@ public class DirectedNetwork extends Network{
 		
 		attachNeighbours();
 		
-		MinimalSpanning();
-		AntennaOrientation();
-		UpdateAllEdges();
+		minimalSpanning();
+		maximalMatching();
+		antennaOrientation();
+		
+		updateAllEdges();
 	}
 	
 	
@@ -41,7 +43,7 @@ public class DirectedNetwork extends Network{
 	 * Goes through each node of the sensor list - then goes through every edge (non-mst)
 	 * and checks if they are still supposed to be neighbouring. 
 	 */
-	public void UpdateAllEdges(){
+	public void updateAllEdges(){
 		for (Node n: sensorlist){
 			for (int i = 0; i < n.getAllEdges().size();i++){
 				Node s = n.getAllEdges().get(i);
@@ -56,7 +58,7 @@ public class DirectedNetwork extends Network{
 	/**
 	 * Prim's algorithm
 	 */
-	public void MinimalSpanning(){
+	public void minimalSpanning(){
 		int smallestDistance;
 		Node origin = new Node();
 		Node destination = new Node();
@@ -83,7 +85,7 @@ public class DirectedNetwork extends Network{
 	/**
 	 * Orients the antenas
 	 */
-	public void AntennaOrientation(){
+	public void antennaOrientation(){
 		for (Node n: sensorlist){
 			//System.out.println("SENSOR LIST. This node has " + n.getMSTEdges().size() + " edges and " + n.getAllEdges().size() + " neighbours" );
 			double smallestAngle = 1000;

@@ -75,6 +75,7 @@ public class Network {
 		}
 		
 		attachNeighbours();
+
 	}
 
 	
@@ -86,37 +87,41 @@ public class Network {
 		
 		for (Node n : sensorlist) {
 			
-			if (n.getMatch() != null) continue;
+			if (matchedSet.contains(n)) continue; 
 			
 			int shortestEdgeWeight = Integer.MAX_VALUE;
 			Node closestNeighbour = new Node();
 			
 			for (Node neighbour : n.getMSTEdges()) {
 				
-				if (neighbour.getMatch() != null) continue; // Saftey may not be needed	
-				
-				// Find a neighbour with no neighbours
-				if (neighbour.getMSTEdges().size() == 1) {
-					n.setMatch(neighbour);
-					neighbour.setMatch(n);
-					
-					matchedSet.add(n);
-					matchedSet.add(neighbour);
-					break;
-				}
+				if (!matchedSet.contains(neighbour)) {
+					// Find a neighbour with no neighbours
+					if (neighbour.getMSTEdges().size() == 1) {
+						n.setMatch(neighbour);
+						neighbour.setMatch(n);
+						
+						matchedSet.add(n);
+						matchedSet.add(neighbour);
+						break;
+					}
 
-				// Pick the one with the shortest distance
-				if (n.getWeight(neighbour) < shortestEdgeWeight) {
-					closestNeighbour = neighbour;
-					shortestEdgeWeight = n.getWeight(neighbour);
+					// Pick the one with the shortest distance
+					if (n.getWeight(neighbour) < shortestEdgeWeight) {
+						closestNeighbour = neighbour;
+						shortestEdgeWeight = n.getWeight(neighbour);
+					}
 				}
+				
+
 				
 			}
 			
 			// At this point we have the shortest distance, or a lone neighbour
-			if (n.getMatch() == null) {
+			if (n.getMatch() == null && !closestNeighbour.equals(new Node())) {
 				n.setMatch(closestNeighbour);
 				closestNeighbour.setMatch(n);
+				matchedSet.add(n);
+				matchedSet.add(closestNeighbour);
 			}
 		}
 	}

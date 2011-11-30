@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class GraphPanel extends JPanel {
 	
 	Network network;
-	public boolean displayAngles,displayEdges,displayDiameter,displayshortestPath;
+	public boolean displayAngles,displayEdges,displayDiameter,displayshortestPath, displayMatching;
 	
 	public GraphPanel() {
 		setLayout(null);
@@ -33,11 +33,11 @@ public class GraphPanel extends JPanel {
 		displayshortestPath = false;
 		displayDiameter = false;
 		displayEdges = false;
+		displayMatching = true;	//TODO change to false
 	}
 	
 	
 	/**
-	 * TODO: Is this ever called?
 	 * @param n
 	 */
 	public void DrawNetwork(Network n){
@@ -107,6 +107,18 @@ public class GraphPanel extends JPanel {
 				Node n2 = network.diameterPathList.get(i + 1);
 				
 				g.draw(new Line2D.Double(n1.getX(),n1.getY(),n2.getX(),n2.getY()));
+			}
+		}
+		
+		
+		// Display Maximal Matching
+		if (displayMatching && network instanceof DirectedNetwork) {
+			g.setColor(Color.PINK);
+			for (Node n1 : network.getSensorList()) {
+				Node n2 = n1.getMatch();
+				
+				if (n1 != null && n2 != null)
+					g.draw(new Line2D.Double(n1.getX(),n1.getY(),n2.getX(),n2.getY()));
 			}
 		}
 	}
