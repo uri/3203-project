@@ -159,10 +159,7 @@ public class Frame extends JFrame{
 		
 	}
 	
-	private void statsWindow(){
-		//this is a stub! It should display a window and stats and stuff.
-		System.out.println("Stats!");
-		
+	private void statsWindow(){		
 		// Toggle the frame
 		if (statsFrame.isVisible()) {
 			statsFrame.setVisible(false);

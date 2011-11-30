@@ -51,9 +51,6 @@ public class StatsFrame extends JFrame{
 		super("Statistics");
 		setLayout(null);
 		
-		// Network numbers
-		
-
 		// Size
 		setSize(STATS_WIDTH, STATS_HEIGHT);
 		
@@ -62,22 +59,7 @@ public class StatsFrame extends JFrame{
 
 		// Do not show it right away.
 		setVisible(false);
-		
 
-		
-	/*	
-		addLabel("Num Nodes", 0*LABEL_WIDTH , 1 * LABEL_HEIGHT );
-		
-		addLabel("Shortest Path T", 0*LABEL_WIDTH , 2 * LABEL_HEIGHT );
-		addLabel("Diamter T", 0*LABEL_WIDTH , 3 * LABEL_HEIGHT );
-		addLabel("Hops T", 0*LABEL_WIDTH , 4 * LABEL_HEIGHT );
-		
-		addLabel("Strength", 0*LABEL_WIDTH , 5 * LABEL_HEIGHT );
-		addLabel("Num Networks", 0*LABEL_WIDTH , 6 * LABEL_HEIGHT );
-		
-		addLabel("Strength", 0*LABEL_WIDTH , 5 * LABEL_HEIGHT );
-		addLabel("Total Nodes", 0*LABEL_WIDTH , 7 * LABEL_HEIGHT );
-		*/
 		initDisplayLabels();
 
 	}
@@ -98,15 +80,6 @@ public class StatsFrame extends JFrame{
 		averageAngle.setText("" + stats.getAverageAngle());
 		
 		totalNumberNodes.setText("" +stats.getNumNodes());
-		/*
-		numNodes.setText(""+(int)stats.getNumNodes());
-		rtShortestPath.setText(""+(int)stats.getRtShortestPath());
-		rtDiameter.setText(""+(int)stats.getRtDiameter());
-		rtHops.setText(""+(int)stats.getRtHops());
-		strength.setText(""+(int)stats.getStrength());
-		numNetworksLabel.setText(""+(int)stats.getNumNetworks());
-		totalNumberNodes.setText(""+ (int)(stats.getNumNodes() * stats.getNumNetworks()));
-		*/
 	}
 	
 	private void initDisplayLabels() {
