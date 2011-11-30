@@ -16,7 +16,7 @@ public class View extends JPanel{
 	
 	private static int STATS_HEIGHT = 90;
 	private static int TEXT_HEIGHT = 30;
-    private static int FIELD_WIDTH = 80;
+    private static int FIELD_WIDTH = 90;
     
     GraphPanel omniPanel, directedPanel;
 	JPanel statsPanel;

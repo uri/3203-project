@@ -112,11 +112,11 @@ public class StatisticsRunner {
 	/**
 	 * @return
 	 */
-	public int getAverageAngle(ArrayList<DirectedNetwork> nets) {
+	public int getAverageAngle() {
 		
 		int totalNodes = 0;
 		
-		for (DirectedNetwork net:nets) {
+		for (DirectedNetwork net:listOfDirectedNetworks) {
 			for (Node n : net.getSensorList()) {
 				averageAngle += n.getAngle();
 				totalNodes++;

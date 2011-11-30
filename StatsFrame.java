@@ -32,6 +32,7 @@ public class StatsFrame extends JFrame{
 	JLabel omniShortestPath, directedShortestPath;
 	JLabel omniDiameter, directedDiameter;
 	JLabel omniLength, directedLength;
+	JLabel averageAngle;
 	JLabel 	numNodes;
 	JLabel  rtShortestPath;
 	JLabel  rtDiameter;
@@ -94,6 +95,8 @@ public class StatsFrame extends JFrame{
 		omniLength.setText("" + (int)stats.getOmniAverageLength());
 		directedLength.setText("" + (int)stats.getAverageLength());
 		
+		averageAngle.setText("" + stats.getAverageAngle());
+		
 		totalNumberNodes.setText("" +stats.getNumNodes());
 		/*
 		numNodes.setText(""+(int)stats.getNumNodes());
@@ -132,6 +135,11 @@ public class StatsFrame extends JFrame{
 		createField("Average Route Length", 10, LABEL_HEIGHT*position,omniLength,directedLength);
 		
 		position++;
+		averageAngle = new JLabel("360");
+		instructions = new JLabel("360");
+		createField("Average Angle", 10, LABEL_HEIGHT*position, instructions, averageAngle);
+		
+		position++;
 		instructions = new JLabel("General Stats");
 		addLabel(instructions, TEXT_WIDTH-30,LABEL_HEIGHT*position);
 		
@@ -152,7 +160,7 @@ public class StatsFrame extends JFrame{
 		getContentPane().add(label);
 	}
 	
-	public JLabel createField(String s, int x, int y, JLabel omni, JLabel directed){
+	public void createField(String s, int x, int y, JLabel omni, JLabel directed){
 		JLabel temp = new JLabel(s);
 		temp.setSize(TEXT_WIDTH,LABEL_HEIGHT);
 		temp.setLocation(x,y);
@@ -165,8 +173,6 @@ public class StatsFrame extends JFrame{
 		directed.setSize(LABEL_WIDTH,LABEL_HEIGHT);
 		directed.setLocation(x+TEXT_WIDTH+LABEL_WIDTH+10,y);
 		getContentPane().add(directed);
-		
-		return temp;
 	}
 
 	public void setStatisticsRunner(StatisticsRunner stats) {
