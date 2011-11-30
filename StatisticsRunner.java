@@ -79,21 +79,33 @@ public class StatisticsRunner {
 		
 		// omnidirectional network
 		startTime = System.currentTimeMillis();
-		this.setAverageDiameter(averageDiameterOfNetworks(listOfNetworks));
+		this.setOmniAverageDiameter(averageDiameterOfNetworks(listOfNetworks));
 		endTime = System.currentTimeMillis();
 		this.setOmniRTDiameter((double)(endTime - startTime));
 
 		
+		// directed shortest paths
 		startTime = System.currentTimeMillis();
 		this.setAverageShortest(averageOfShortestPathsForNetwork(listOfDirectedNetworks));
 		endTime = System.currentTimeMillis();
 		this.setRtShortestPath((double)(endTime - startTime));
+		
+		startTime = System.currentTimeMillis();
+		this.setOmniAverageShortest(averageOfShortestPathsForNetwork(listOfNetworks));
+		endTime = System.currentTimeMillis();
+		this.setOmniRTShortestPath((double)(endTime - startTime));
 		
 		
 		startTime = System.currentTimeMillis();
 		this.setAverageLength(averageLengthOfNetworkList(listOfDirectedNetworks));
 		endTime = System.currentTimeMillis();
 		this.setRtHops((double)(endTime - startTime));
+		
+		
+		startTime = System.currentTimeMillis();
+		this.setOmniAverageLength(averageLengthOfNetworkList(listOfNetworks));
+		endTime = System.currentTimeMillis();
+		this.setOmniRTHops((double)(endTime - startTime));
 		
 	}
 	
