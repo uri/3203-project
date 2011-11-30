@@ -93,6 +93,8 @@ public class StatsFrame extends JFrame{
 		
 		omniLength.setText("" + (int)stats.getOmniAverageLength());
 		directedLength.setText("" + (int)stats.getAverageLength());
+		
+		totalNumberNodes.setText("" +stats.getNumNodes());
 		/*
 		numNodes.setText(""+(int)stats.getNumNodes());
 		rtShortestPath.setText(""+(int)stats.getRtShortestPath());
@@ -131,9 +133,23 @@ public class StatsFrame extends JFrame{
 		
 		position++;
 		instructions = new JLabel("General Stats");
-		instructions.setSize(LABEL_WIDTH*2,LABEL_HEIGHT);
-		instructions.setLocation(TEXT_WIDTH-10,LABEL_HEIGHT*position);
-		getContentPane().add(instructions);
+		addLabel(instructions, TEXT_WIDTH-30,LABEL_HEIGHT*position);
+		
+		position++;
+		instructions = new JLabel("Total Nodes");
+		addLabel(instructions,20,LABEL_HEIGHT*position);
+		
+		totalNumberNodes = new JLabel("0");
+		totalNumberNodes.setSize(LABEL_WIDTH,LABEL_HEIGHT);
+		totalNumberNodes.setLocation(20+LABEL_WIDTH*2,LABEL_HEIGHT*position);
+		getContentPane().add(totalNumberNodes);
+		
+	}
+	
+	private void addLabel(JLabel label, int x, int y) {
+		label.setSize(LABEL_WIDTH*2,LABEL_HEIGHT);
+		label.setLocation(x + 5,y + 5);
+		getContentPane().add(label);
 	}
 	
 	public JLabel createField(String s, int x, int y, JLabel omni, JLabel directed){
