@@ -21,14 +21,15 @@ public class View extends JPanel{
     GraphPanel omniPanel, directedPanel;
 	JPanel statsPanel;
     JTextField sensorsField, strengthField;
-    JButton updateButton,statsButton,shortestPathButton,angleButton,edgeButton;
+    JButton updateButton,statsButton,shortestPathButton,angleButton,edgeButton,diameterButton;
+    private int placement;
 	
 	/**
 	 * 
 	 */
 	public View(){
 		setLayout(null);
-		
+		placement = 0;
 		statsPanel = createBasePanel();
 		statsPanel.setLocation(0,0);
 		statsPanel.setSize(Frame.WIDTH,STATS_HEIGHT);
@@ -78,39 +79,46 @@ public class View extends JPanel{
 		strengthLabel.setSize(60,TEXT_HEIGHT);
 		strengthLabel.setLocation(FIELD_WIDTH+10,0);
 		result.add(strengthLabel);
-		
+		placement=1;
 		strengthField = new JTextField("80");
-		strengthField.setLocation(10+FIELD_WIDTH,TEXT_HEIGHT);
+		strengthField.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
 		strengthField.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		result.add(strengthField);
-		
+		placement++;
 		updateButton = new JButton("Go!");
 		updateButton.setSize(60,TEXT_HEIGHT);
-		updateButton.setLocation(10+FIELD_WIDTH*2,TEXT_HEIGHT);
+		updateButton.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
 		result.add(updateButton);
-		
+		placement++;
 		statsButton = new JButton("Stats!");
 		statsButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
-		statsButton.setLocation(10+FIELD_WIDTH*3,TEXT_HEIGHT);
+		statsButton.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
 		result.add(statsButton);
-		
+		placement+=2;
 		// Adding the Shortest Path button
 		shortestPathButton = new JButton("SP");
 		shortestPathButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
-		shortestPathButton.setLocation(10+FIELD_WIDTH*5,TEXT_HEIGHT);
+		shortestPathButton.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
 		result.add(shortestPathButton);
-		
+		placement++;
 		// Adding the Angle button
 		angleButton = new JButton("Angle");
 		angleButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
-		angleButton.setLocation(10+FIELD_WIDTH*6,TEXT_HEIGHT);
+		angleButton.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
 		result.add(angleButton);
+		placement++;
 		//adding the Edges Button
 		edgeButton = new JButton("Edges");
 		edgeButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
-		edgeButton.setLocation(10+FIELD_WIDTH*7,TEXT_HEIGHT);
+		edgeButton.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
 		result.add(edgeButton);
-		
+		placement++;
+		//adding the Diameter Button
+		diameterButton = new JButton("Diameter");
+		diameterButton.setSize(FIELD_WIDTH*2,TEXT_HEIGHT);
+		diameterButton.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
+		result.add(diameterButton);
+		placement+=2;
 		return result;
 	}
 	
@@ -188,7 +196,9 @@ public class View extends JPanel{
 	public JButton getEdgeButton(){
 		return edgeButton;
 	}
-	
+	public JButton getDiameterButton(){
+		return diameterButton;
+	}
 	
 	
 	//this is for testing the appearance of the view.

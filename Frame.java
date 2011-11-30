@@ -24,20 +24,14 @@ public class Frame extends JFrame{
 	
 	View view;
 	
-	
 	int strength;
 	int sensors;
 	
 	// Statistics frame
 	StatsFrame statsFrame;
 	
-
-	
-	
 	public final static int WIDTH = 1100;
 	public final static int HEIGHT = 680;
-	
-	
 	
 	/**
 	 * CONSTRUCTOR
@@ -99,12 +93,20 @@ public class Frame extends JFrame{
 				toggleAngleDisplay();
 			}
 		});
-		/**
+		/********************************************************
 		 * Edge Toggle Button		 * 
-		 */
+		 *********************************************************/
 		view.getEdgeButton().addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				toggleEdgeDisplay();
+			}
+		});
+		/********************************************************
+		 * Diameter Toggle Button		 * 
+		 *********************************************************/
+		view.getDiameterButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				toggleDiameterDisplay();
 			}
 		});
 		// Make sure it exists properly
@@ -194,6 +196,9 @@ public class Frame extends JFrame{
 		view.directedPanel.displayEdges = !view.directedPanel.displayEdges;
 		view.omniPanel.displayEdges =!view.omniPanel.displayEdges;
 		view.repaint();
+	}
+	private void toggleDiameterDisplay(){
+		return;
 	}
 	
 	public static void main(String [] args){
