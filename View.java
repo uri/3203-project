@@ -21,7 +21,7 @@ public class View extends JPanel{
     GraphPanel omniPanel, directedPanel;
 	JPanel statsPanel;
     JTextField sensorsField, strengthField,networksField;
-    JButton updateButton,statsButton,shortestPathButton,angleButton,edgeButton,diameterButton;
+    JButton updateButton,statsButton,shortestPathButton,angleButton,edgeButton,diameterButton, matchingButton;
     private int placement;
 	
 	/**
@@ -124,10 +124,18 @@ public class View extends JPanel{
 		placement++;
 		//adding the Diameter Button
 		diameterButton = new JButton("Diameter");
-		diameterButton.setSize(FIELD_WIDTH*2,TEXT_HEIGHT);
+		diameterButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		diameterButton.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
 		result.add(diameterButton);
-		placement+=2;
+		placement++;
+		
+		//adding the Diameter Button
+		matchingButton = new JButton("Matching");
+		matchingButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
+		matchingButton.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
+		result.add(matchingButton);
+		placement++;
+		
 		return result;
 	}
 	
@@ -216,6 +224,14 @@ public class View extends JPanel{
 	}
 	public JButton getDiameterButton(){
 		return diameterButton;
+	}
+
+	public JButton getMatchingButton() {
+		return matchingButton;
+	}
+
+	public void setMatchingButton(JButton matchingButton) {
+		this.matchingButton = matchingButton;
 	}
 	
 	

@@ -111,6 +111,15 @@ public class Frame extends JFrame{
 				toggleDiameterDisplay();
 			}
 		});
+		
+		/********************************************************
+		 * Matching Toggle Button		 * 
+		 *********************************************************/
+		view.getMatchingButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				toggleMatching();
+			}
+		});
 		// Make sure it exists properly
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Size the frame.
@@ -218,6 +227,18 @@ public class Frame extends JFrame{
 		view.omniPanel.displayDiameter = !view.omniPanel.displayDiameter;
 		view.repaint();
 		
+	}
+	
+	private void toggleMatching() {
+		if (view.directedPanel.displayMatching)
+			view.getMatchingButton().setBackground(Color.GRAY);
+		else 
+			view.getMatchingButton().setBackground(Color.green);
+		
+		view.directedPanel.displayMatching = !view.directedPanel.displayMatching;
+		view.omniPanel.displayMatching = !view.omniPanel.displayMatching;
+		
+		view.repaint();
 	}
 	
 	public static void main(String [] args){
