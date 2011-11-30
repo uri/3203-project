@@ -19,6 +19,7 @@ public class Network {
 	ArrayList<Node> sensorlist;
 
 	List<Node> shortestPathList;
+	List<Node> diameterPathList;
 	int strength;
 
 	protected static int DEFAULTX = 100;
@@ -34,6 +35,7 @@ public class Network {
 	 */
 	public Network() {
 		shortestPathList = null;
+		diameterPathList = null;
 		strength = 50;
 		sensorlist = new ArrayList<Node>();
 		sensorlist.add(new Node(DEFAULTX, DEFAULTY));
@@ -109,10 +111,36 @@ public class Network {
 		//System.out.println("This is the weight to the last node: "
 		//		+ pathedList.get(pathedList.size() - 1).getDistance());
 		do {
+			
+			// TEMP FIX
+			if (end == null) break;
 			shortestPathList.add(end);
 			end = end.getPredecessor();
 		} while (end != null);
 
+	}
+	
+	/**
+	 *  Maybe this should return instead of setting?
+	 */
+	public void diameterPathList() {
+		Node startNode = this.sensorlist.get(0);
+		List<Node> pathedList = dijkstra(sensorlist, startNode);
+		
+		Node endNode = new Node();
+		endNode.setDistance(Integer.MIN_VALUE);
+		
+		for (Node n : sensorlist) {
+			if (n.getDistance() > endNode.getDistance()) {
+				endNode = n;
+			}
+		}
+		
+		do {
+			diameterPathList.add(endNode);
+			endNode = endNode.getPredecessor();
+		} while (endNode != null);
+		
 	}
 
 	
