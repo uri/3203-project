@@ -122,16 +122,16 @@ public class StatsFrame extends JFrame{
 		getContentPane().add(instructions);
 		
 		int position = 1;
-		omniShortestPath = new JLabel("0");
-		directedShortestPath = new JLabel("0");
+		omniShortestPath = new JLabel("qq");
+		directedShortestPath = new JLabel("qq");
 		createField("Shortest Paths",10,LABEL_HEIGHT*position,omniShortestPath,directedShortestPath);
 		position++;
-		omniDiameter = new JLabel("0");
-		directedDiameter = new JLabel("0");
+		omniDiameter = new JLabel("qq");
+		directedDiameter = new JLabel("qq");
 		createField("Average Network Diameter",10, LABEL_HEIGHT*position,omniDiameter,directedDiameter );
 		position++;
-		omniLength = new JLabel("0");
-		directedLength = new JLabel("0");
+		omniLength = new JLabel("qq");
+		directedLength = new JLabel("qq");
 		createField("Average Route Length", 10, LABEL_HEIGHT*position,omniLength,directedLength);
 		
 		position++;
@@ -147,7 +147,7 @@ public class StatsFrame extends JFrame{
 		instructions = new JLabel("Total Nodes");
 		addLabel(instructions,20,LABEL_HEIGHT*position);
 		
-		totalNumberNodes = new JLabel("0");
+		totalNumberNodes = new JLabel("qq");
 		totalNumberNodes.setSize(LABEL_WIDTH,LABEL_HEIGHT);
 		totalNumberNodes.setLocation(20+LABEL_WIDTH*2,LABEL_HEIGHT*position);
 		getContentPane().add(totalNumberNodes);

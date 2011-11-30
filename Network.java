@@ -222,7 +222,7 @@ public class Network {
 		startNode.setDistance(0);
 		visited.add(startNode);
 		
-		for (Node edge : startNode.getMSTEdges()) {
+		for (Node edge : startNode.getAllEdges()) {
 			int distanceTo = startNode.getWeight(edge);
 			edge.setDistance(distanceTo);
 			edge.setPredecessor(startNode);
@@ -231,7 +231,7 @@ public class Network {
 		
 		while (!unvisited.isEmpty()) {
 			Node cur = unvisited.get(unvisited.size() - 1);
-			for (Node edge : cur.getMSTEdges()) {
+			for (Node edge : cur.getAllEdges()) {
 
 				if (!visited.contains(edge)) {
 					unvisited.add(edge);

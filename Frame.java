@@ -200,9 +200,9 @@ public class Frame extends JFrame{
 	private void toggleAngleDisplay() {
 		
 		if (view.directedPanel.displayAngles)
-			view.getAngleButton().setBackground(Color.green);
-		else 
 			view.getAngleButton().setBackground(Color.GRAY);
+		else 
+			view.getAngleButton().setBackground(Color.green);
 		
 		view.directedPanel.displayAngles = !view.directedPanel.displayAngles;
 		view.omniPanel.displayAngles = !view.omniPanel.displayAngles;
