@@ -90,24 +90,24 @@ public class View extends JPanel{
 		result.add(updateButton);
 		
 		statsButton = new JButton("Stats!");
-		statsButton.setSize(100,TEXT_HEIGHT);
+		statsButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		statsButton.setLocation(10+FIELD_WIDTH*3,TEXT_HEIGHT);
 		result.add(statsButton);
 		
 		// Adding the Shortest Path button
 		shortestPathButton = new JButton("SP");
-		shortestPathButton.setSize(100,TEXT_HEIGHT);
+		shortestPathButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		shortestPathButton.setLocation(10+FIELD_WIDTH*5,TEXT_HEIGHT);
 		result.add(shortestPathButton);
 		
 		// Adding the Angle button
 		angleButton = new JButton("Angle");
-		angleButton.setSize(100,TEXT_HEIGHT);
+		angleButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		angleButton.setLocation(10+FIELD_WIDTH*6,TEXT_HEIGHT);
 		result.add(angleButton);
 		//adding the Edges Button
 		edgeButton = new JButton("Edges");
-		edgeButton.setSize(100,TEXT_HEIGHT);
+		edgeButton.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		edgeButton.setLocation(10+FIELD_WIDTH*7,TEXT_HEIGHT);
 		result.add(edgeButton);
 		
@@ -185,7 +185,9 @@ public class View extends JPanel{
 	public void setAngleButton(JButton angleButton) {
 		this.angleButton = angleButton;
 	}
-	
+	public JButton getEdgeButton(){
+		return edgeButton;
+	}
 	
 	
 	

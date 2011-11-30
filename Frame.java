@@ -99,6 +99,14 @@ public class Frame extends JFrame{
 				toggleAngleDisplay();
 			}
 		});
+		/**
+		 * Edge Toggle Button		 * 
+		 */
+		view.getEdgeButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				toggleEdgeDisplay();
+			}
+		});
 		// Make sure it exists properly
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Size the frame.
@@ -178,9 +186,14 @@ public class Frame extends JFrame{
 			view.getAngleButton().setBackground(Color.GRAY);
 		
 		view.directedPanel.displayAngles = !view.directedPanel.displayAngles;
-		view.directedPanel.repaint();
 		view.omniPanel.displayAngles = !view.omniPanel.displayAngles;
-		view.omniPanel.repaint();
+		view.repaint();
+	}
+	
+	private void toggleEdgeDisplay(){
+		view.directedPanel.displayEdges = !view.directedPanel.displayEdges;
+		view.omniPanel.displayEdges =!view.omniPanel.displayEdges;
+		view.repaint();
 	}
 	
 	public static void main(String [] args){

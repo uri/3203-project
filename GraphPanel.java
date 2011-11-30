@@ -20,7 +20,7 @@ public class GraphPanel extends JPanel {
 	
 	Network network;
 	public boolean isDisplayShorestPath;
-	public boolean displayAngles;
+	public boolean displayAngles,displayEdges;
 	
 	public GraphPanel() {
 		setLayout(null);
@@ -31,6 +31,7 @@ public class GraphPanel extends JPanel {
 		add(inventoryLabel);
 		isDisplayShorestPath = false;
 		displayAngles = true;
+		displayEdges = false;
 	}
 	
 	
@@ -41,6 +42,13 @@ public class GraphPanel extends JPanel {
 	public void DrawNetwork(Network n){
 		network = n;
 		repaint();
+	}
+	
+	public void setEdgeDisplay(boolean b){
+		displayEdges = b;
+	}
+	public boolean getEdgeDisplay(){
+		return displayEdges;
 	}
 	
 	/**
@@ -65,15 +73,18 @@ public class GraphPanel extends JPanel {
 		for (Node s : network.getSensorList()){
 			g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
 		}
-		for (Node s: network.getSensorList()){
-			for (Node n: s.getAllEdges()){
-				g.setColor(Color.BLUE);
-				g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
+		//display the edges
+		if(displayEdges){
+			for (Node s: network.getSensorList()){
+				for (Node n: s.getAllEdges()){
+					g.setColor(Color.BLUE);
+					g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
+				}
+		//		for(Node n: s.getMSTEdges()){
+		//			g.setColor(Color.RED);
+		//			g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
+		//		}
 			}
-	//		for(Node n: s.getMSTEdges()){
-	//			g.setColor(Color.RED);
-	//			g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
-	//		}
 		}
 		// Draw the shortest path
 		if (network.getShortestPathList() != null && isDisplayShorestPath) {
