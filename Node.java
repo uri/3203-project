@@ -17,6 +17,7 @@ public class Node {
 	
 	private int distance;
 	private Node pred;
+	private Node match;
 
 	/**
 	 * CONSTRUCTOR
@@ -27,6 +28,7 @@ public class Node {
 		mstEdges = new ArrayList<Node>();
 		distance = Integer.MAX_VALUE;
 		pred = null;
+		match = null;
 	}
 	
 	
@@ -254,6 +256,18 @@ public class Node {
 	 */
 	public Node getPredecessor() {
 		return pred;
+	}
+
+
+
+	public Node getMatch() {
+		return match;
+	}
+
+
+
+	public void setMatch(Node match) {
+		this.match = match;
 	}
 }
 

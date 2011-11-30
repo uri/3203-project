@@ -19,6 +19,7 @@ public class Network {
 	ArrayList<Node> sensorlist;
 
 	List<Node> shortestPathList;
+	List<Node> diameterPathList;
 	int strength;
 
 	protected static int DEFAULTX = 100;
@@ -34,6 +35,7 @@ public class Network {
 	 */
 	public Network() {
 		shortestPathList = null;
+		diameterPathList = null;
 		strength = 50;
 		sensorlist = new ArrayList<Node>();
 		sensorlist.add(new Node(DEFAULTX, DEFAULTY));
@@ -73,8 +75,57 @@ public class Network {
 		}
 		
 		attachNeighbours();
+
 	}
 
+	
+	/**
+	 * 
+	 */
+	public void maximalMatching() {
+		Set<Node> matchedSet = new HashSet<Node>();
+		
+		for (Node n : sensorlist) {
+			
+			if (matchedSet.contains(n)) continue; 
+			
+			int shortestEdgeWeight = Integer.MAX_VALUE;
+			Node closestNeighbour = new Node();
+			
+			for (Node neighbour : n.getMSTEdges()) {
+				
+				if (!matchedSet.contains(neighbour)) {
+					// Find a neighbour with no neighbours
+					if (neighbour.getMSTEdges().size() == 1) {
+						n.setMatch(neighbour);
+						neighbour.setMatch(n);
+						
+						matchedSet.add(n);
+						matchedSet.add(neighbour);
+						break;
+					}
+
+					// Pick the one with the shortest distance
+					if (n.getWeight(neighbour) < shortestEdgeWeight) {
+						closestNeighbour = neighbour;
+						shortestEdgeWeight = n.getWeight(neighbour);
+					}
+				}
+				
+
+				
+			}
+			
+			// At this point we have the shortest distance, or a lone neighbour
+			if (n.getMatch() == null && !closestNeighbour.equals(new Node())) {
+				n.setMatch(closestNeighbour);
+				closestNeighbour.setMatch(n);
+				matchedSet.add(n);
+				matchedSet.add(closestNeighbour);
+			}
+		}
+	}
+	
 	/**
 	 * Finds the shortest path between two nodes. Sets a networks 
 	 * shortestPathList variable.
@@ -109,10 +160,38 @@ public class Network {
 		//System.out.println("This is the weight to the last node: "
 		//		+ pathedList.get(pathedList.size() - 1).getDistance());
 		do {
+			
+			// TEMP FIX
+			if (end == null) break;
 			shortestPathList.add(end);
 			end = end.getPredecessor();
 		} while (end != null);
 
+	}
+	
+	/**
+	 *  Maybe this should return instead of setting?
+	 */
+	public void diameterPathList() {
+		Node startNode = this.sensorlist.get(0);
+		List<Node> pathedList = dijkstra(sensorlist, startNode);
+		
+		Node endNode = new Node();
+		endNode.setDistance(Integer.MIN_VALUE);
+		
+		for (Node n : sensorlist) {
+			if (n.getDistance() > endNode.getDistance()) {
+				endNode = n;
+			}
+		}
+		
+		diameterPathList = new ArrayList<Node>();
+		
+		do {
+			diameterPathList.add(endNode);
+			endNode = endNode.getPredecessor();
+		} while (endNode != null);
+		
 	}
 
 	

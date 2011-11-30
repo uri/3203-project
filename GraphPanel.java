@@ -19,8 +19,7 @@ import javax.swing.JPanel;
 public class GraphPanel extends JPanel {
 	
 	Network network;
-	public boolean isDisplayShorestPath;
-	public boolean displayAngles;
+	public boolean displayAngles,displayEdges,displayDiameter,displayshortestPath, displayMatching;
 	
 	public GraphPanel() {
 		setLayout(null);
@@ -29,18 +28,28 @@ public class GraphPanel extends JPanel {
 		inventoryLabel.setSize(60,10);
 		inventoryLabel.setLocation(10,0);
 		add(inventoryLabel);
-		isDisplayShorestPath = false;
+		
 		displayAngles = true;
+		displayshortestPath = false;
+		displayDiameter = false;
+		displayEdges = false;
+		displayMatching = true;	//TODO change to false
 	}
 	
 	
 	/**
-	 * TODO: Is this ever called?
 	 * @param n
 	 */
 	public void DrawNetwork(Network n){
 		network = n;
 		repaint();
+	}
+	
+	public void setEdgeDisplay(boolean b){
+		displayEdges = b;
+	}
+	public boolean getEdgeDisplay(){
+		return displayEdges;
 	}
 	
 	/**
@@ -65,24 +74,51 @@ public class GraphPanel extends JPanel {
 		for (Node s : network.getSensorList()){
 			g.fill(new Ellipse2D.Double(s.getX()-3,s.getY()-3,6,6));
 		}
-		for (Node s: network.getSensorList()){
-			for (Node n: s.getAllEdges()){
-				g.setColor(Color.BLUE);
-				g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
+		//display the edges
+		if(displayEdges){
+			for (Node s: network.getSensorList()){
+				for (Node n: s.getAllEdges()){
+					g.setColor(Color.BLUE);
+					g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
+				}
+		//		for(Node n: s.getMSTEdges()){
+		//			g.setColor(Color.RED);
+		//			g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
+		//		}
 			}
-	//		for(Node n: s.getMSTEdges()){
-	//			g.setColor(Color.RED);
-	//			g.draw(new Line2D.Double(n.getX(),n.getY(),s.getX(),s.getY()));
-	//		}
 		}
 		// Draw the shortest path
-		if (network.getShortestPathList() != null && isDisplayShorestPath) {
+		if (network.getShortestPathList() != null && displayshortestPath) {
 			g.setColor(Color.GREEN);
 			for (int i = 0; i < network.getShortestPathList().size() - 1; i++) {
 				Node n1 = network.getShortestPathList().get(i);
 				Node n2 = network.getShortestPathList().get(i + 1);
 				
 				g.draw(new Line2D.Double(n1.getX(),n1.getY(),n2.getX(),n2.getY()));
+			}
+		}
+		
+		
+		// Draw the diameter
+		if (network.diameterPathList != null && displayDiameter) {
+			g.setColor(Color.ORANGE);
+			for (int i = 0; i < network.diameterPathList.size() - 1; i++) {
+				Node n1 = network.diameterPathList.get(i);
+				Node n2 = network.diameterPathList.get(i + 1);
+				
+				g.draw(new Line2D.Double(n1.getX(),n1.getY(),n2.getX(),n2.getY()));
+			}
+		}
+		
+		
+		// Display Maximal Matching
+		if (displayMatching && network instanceof DirectedNetwork) {
+			g.setColor(Color.PINK);
+			for (Node n1 : network.getSensorList()) {
+				Node n2 = n1.getMatch();
+				
+				if (n1 != null && n2 != null)
+					g.draw(new Line2D.Double(n1.getX(),n1.getY(),n2.getX(),n2.getY()));
 			}
 		}
 	}

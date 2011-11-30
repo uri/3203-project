@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import org.omg.CORBA.OMGVMCID;
+
 // The controller
 public class Frame extends JFrame{
 
@@ -24,20 +26,14 @@ public class Frame extends JFrame{
 	
 	View view;
 	
-	
 	int strength;
 	int sensors;
 	
 	// Statistics frame
 	StatsFrame statsFrame;
 	
-
-	
-	
 	public final static int WIDTH = 1100;
 	public final static int HEIGHT = 680;
-	
-	
 	
 	/**
 	 * CONSTRUCTOR
@@ -99,6 +95,22 @@ public class Frame extends JFrame{
 				toggleAngleDisplay();
 			}
 		});
+		/********************************************************
+		 * Edge Toggle Button		 * 
+		 *********************************************************/
+		view.getEdgeButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				toggleEdgeDisplay();
+			}
+		});
+		/********************************************************
+		 * Diameter Toggle Button		 * 
+		 *********************************************************/
+		view.getDiameterButton().addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				toggleDiameterDisplay();
+			}
+		});
 		// Make sure it exists properly
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Size the frame.
@@ -114,10 +126,16 @@ public class Frame extends JFrame{
 		network = new Network(sensors, strength);
 		directedNetwork = new DirectedNetwork(network);
 		view.updateNetwork(network, directedNetwork);
+		
+		
 		// Shortest path
 		Node start = directedNetwork.getSensorList().get(0);
 		Node end= directedNetwork.getSensorList().get(directedNetwork.getSensorList().size() -1);
 		directedNetwork.shortestPath(start, end);
+		
+		// Diameter
+		directedNetwork.diameterPathList();
+		
 		// Update the stats pane
 		if (statsFrame.isVisible()) {
 			int numberOfNetworks = statsFrame.getNetworkNum();
@@ -150,10 +168,10 @@ public class Frame extends JFrame{
 	 */
 	private void shortestPath() {
 		// Toggle the button
-		view.directedPanel.isDisplayShorestPath = !view.directedPanel.isDisplayShorestPath;
+		view.directedPanel.displayshortestPath = !view.directedPanel.displayshortestPath;
 		
 		// Toggle the buttons color.
-		if (view.directedPanel.isDisplayShorestPath)
+		if (view.directedPanel.displayshortestPath)
 			view.getShortestPathButtong().setBackground(Color.green);
 		else 
 			view.getShortestPathButtong().setBackground(Color.GRAY);
@@ -178,9 +196,28 @@ public class Frame extends JFrame{
 			view.getAngleButton().setBackground(Color.GRAY);
 		
 		view.directedPanel.displayAngles = !view.directedPanel.displayAngles;
-		view.directedPanel.repaint();
 		view.omniPanel.displayAngles = !view.omniPanel.displayAngles;
-		view.omniPanel.repaint();
+		view.repaint();
+	}
+	
+	private void toggleEdgeDisplay(){
+		view.directedPanel.displayEdges = !view.directedPanel.displayEdges;
+		view.omniPanel.displayEdges =!view.omniPanel.displayEdges;
+		view.repaint();
+	}
+	
+	
+	private void toggleDiameterDisplay(){
+		
+		if (view.directedPanel.displayDiameter)
+			view.getDiameterButton().setBackground(Color.GRAY);
+		else 
+			view.getDiameterButton().setBackground(Color.green);
+		
+		view.directedPanel.displayDiameter = !view.directedPanel.displayDiameter;
+		view.omniPanel.displayDiameter = !view.omniPanel.displayDiameter;
+		view.repaint();
+		
 	}
 	
 	public static void main(String [] args){
