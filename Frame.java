@@ -138,7 +138,7 @@ public class Frame extends JFrame{
 		
 		// Update the stats pane
 		if (statsFrame.isVisible()) {
-			int numberOfNetworks = statsFrame.getNetworkNum();
+			int numberOfNetworks = view.getNetworks();
 			int numberOfNodes = sensors;
 			int signalStrength = strength;
 			StatisticsRunner stats = new StatisticsRunner(numberOfNetworks, numberOfNodes, signalStrength);

@@ -183,6 +183,11 @@ public class View extends JPanel{
 	}
 	
 	public int getNetworks(){
+		int x = Integer.parseInt(networksField.getText());
+		if (x < 1)
+			networksField.setText("1");
+		else if (x > 100)
+			networksField.setText("100");
 		return Integer.parseInt(networksField.getText());
 	}
 

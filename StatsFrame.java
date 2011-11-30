@@ -23,14 +23,11 @@ public class StatsFrame extends JFrame{
 	public static final int STATS_HEIGHT = 440;
 	public static final int STATS_WIDTH = 305;
 	
-	private static final int LABEL_WIDTH = 100;
+	private static final int TEXT_WIDTH = 170;
+	private static final int LABEL_WIDTH = 50;
 	private static final int LABEL_HEIGHT = 40;
 	
 	StatisticsRunner stats;
-	
-	JSlider slider;
-	
-	Container contentPane;
 	
 	JLabel omniShortestPath, directedShortestPath;
 	JLabel omniDiameter, directedDiameter;
@@ -53,8 +50,6 @@ public class StatsFrame extends JFrame{
 		super("Statistics");
 		setLayout(null);
 		
-		contentPane = getContentPane();
-		
 		// Network numbers
 		
 
@@ -67,15 +62,7 @@ public class StatsFrame extends JFrame{
 		// Do not show it right away.
 		setVisible(false);
 		
-		JLabel instructions = new JLabel("Move the slider to select the number of networks.");
-		instructions.setSize(STATS_WIDTH, 50);
-		instructions.setLocation(5, 5);
-		getContentPane().add(instructions);
-		
-		instructions = new JLabel("Hit Go!");
-		instructions.setSize(STATS_WIDTH, 50);
-		instructions.setLocation(5, 18);
-		getContentPane().add(instructions);
+
 		
 	/*	
 		addLabel("Num Nodes", 0*LABEL_WIDTH , 1 * LABEL_HEIGHT );
@@ -91,44 +78,13 @@ public class StatsFrame extends JFrame{
 		addLabel("Total Nodes", 0*LABEL_WIDTH , 7 * LABEL_HEIGHT );
 		*/
 		initDisplayLabels();
-		
-		slider = new JSlider(SwingConstants.HORIZONTAL, 5,100, 30);
-		slider.setLocation(5, STATS_HEIGHT - 100);
-		slider.setSize(STATS_WIDTH - 100, 50);
-		slider.setVisible(true);
-		//Turn on labels at major tick marks.
-		slider.setMajorTickSpacing(10);
-		slider.setMinorTickSpacing(5);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-			
-		getContentPane().add(slider);
-		
-	
-		// Add the listener
-		slider.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				JSlider source = (JSlider)e.getSource();
-				handleSlider(source);
-				numNetworksLabel.setText(""+numNetworks);
-			}
-		});
-		
-		// Get the statistics class
-		handleSlider(slider);
 
 	}
 	
-	private void handleSlider(JSlider slider) {
-	    if (!slider.getValueIsAdjusting()) {
-	    	numNetworks = (int)slider.getValue();
-	    }
-	}
 	
 	public void update() {
 		if (stats == null) return;
 		
-		handleSlider(slider);
 		omniShortestPath.setText("" + (int)stats.getOmniAverageShortest());
 		directedShortestPath.setText("" + (int)stats.getAverageShortest());
 		
@@ -148,19 +104,18 @@ public class StatsFrame extends JFrame{
 		*/
 	}
 	
-
-	private void addLabel(String name, int x, int y) {
-		JLabel label = new JLabel(name);
-		addLabel(label, x, y);
-	}
-	
-	private void addLabel(JLabel label, int x, int y) {
-		label.setSize(LABEL_WIDTH,LABEL_HEIGHT);
-		label.setLocation(x + 5,y + 5);
-		contentPane.add(label);
-	}
-	
 	private void initDisplayLabels() {
+		
+		JLabel instructions = new JLabel("Omni");
+		instructions.setSize(50, 50);
+		instructions.setLocation(TEXT_WIDTH, 5);
+		getContentPane().add(instructions);
+		
+		instructions = new JLabel("Directed");
+		instructions.setSize(50, 50);
+		instructions.setLocation(TEXT_WIDTH+55, 5);
+		getContentPane().add(instructions);
+		
 		int position = 1;
 		omniShortestPath = new JLabel("0");
 		directedShortestPath = new JLabel("0");
@@ -168,46 +123,31 @@ public class StatsFrame extends JFrame{
 		position++;
 		omniDiameter = new JLabel("0");
 		directedDiameter = new JLabel("0");
-		createField("Network Diameter",10, LABEL_HEIGHT*position,omniDiameter,directedDiameter );
+		createField("Average Network Diameter",10, LABEL_HEIGHT*position,omniDiameter,directedDiameter );
 		position++;
 		omniLength = new JLabel("0");
 		directedLength = new JLabel("0");
-		createField("Route Length", 10, LABEL_HEIGHT*position,omniLength,directedLength);
+		createField("Average Route Length", 10, LABEL_HEIGHT*position,omniLength,directedLength);
 		
-	/*	numNodes = new JLabel("0"); 
-		addLabel(numNodes, 1*LABEL_WIDTH , 1 * LABEL_HEIGHT );
-		
-		rtShortestPath  = new JLabel("0");
-		addLabel(rtShortestPath, 1*LABEL_WIDTH , 2 * LABEL_HEIGHT );
-		
-		rtDiameter = new JLabel("0");
-		addLabel(rtDiameter, 1*LABEL_WIDTH , 3 * LABEL_HEIGHT );
-		
-		rtHops = new JLabel("0");
-		addLabel(rtHops, 1*LABEL_WIDTH , 4 * LABEL_HEIGHT );
-		
-		
-		strength = new JLabel("0");
-		addLabel(strength, 1*LABEL_WIDTH , 5 * LABEL_HEIGHT );
-		
-		numNetworksLabel = new JLabel("0");
-		addLabel(numNetworksLabel, 1*LABEL_WIDTH , 6 * LABEL_HEIGHT );
-		
-		totalNumberNodes = new JLabel("0");
-		addLabel(totalNumberNodes, 1*LABEL_WIDTH , 7 * LABEL_HEIGHT );*/
+		position++;
+		instructions = new JLabel("General Stats");
+		instructions.setSize(LABEL_WIDTH*2,LABEL_HEIGHT);
+		instructions.setLocation(TEXT_WIDTH-10,LABEL_HEIGHT*position);
+		getContentPane().add(instructions);
 	}
 	
 	public JLabel createField(String s, int x, int y, JLabel omni, JLabel directed){
 		JLabel temp = new JLabel(s);
-		temp.setSize(LABEL_WIDTH,LABEL_HEIGHT);
+		temp.setSize(TEXT_WIDTH,LABEL_HEIGHT);
 		temp.setLocation(x,y);
 		getContentPane().add(temp);
-		contentPane.add(temp);
+		
 		omni.setSize(LABEL_WIDTH,LABEL_HEIGHT);
-		omni.setLocation(x+LABEL_WIDTH+10,y);
+		omni.setLocation(x+TEXT_WIDTH+10,y);
 		getContentPane().add(omni);
+		
 		directed.setSize(LABEL_WIDTH,LABEL_HEIGHT);
-		directed.setLocation(x+LABEL_WIDTH*2+10,y);
+		directed.setLocation(x+TEXT_WIDTH+LABEL_WIDTH+10,y);
 		getContentPane().add(directed);
 		
 		return temp;
