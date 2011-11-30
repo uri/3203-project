@@ -77,6 +77,50 @@ public class Network {
 		attachNeighbours();
 	}
 
+	
+	/**
+	 * 
+	 */
+	public void maximalMatching() {
+		Set<Node> matchedSet = new HashSet<Node>();
+		
+		for (Node n : sensorlist) {
+			
+			if (n.getMatch() != null) continue;
+			
+			int shortestEdgeWeight = Integer.MAX_VALUE;
+			Node closestNeighbour = new Node();
+			
+			for (Node neighbour : n.getMSTEdges()) {
+				
+				if (neighbour.getMatch() != null) continue; // Saftey may not be needed	
+				
+				// Find a neighbour with no neighbours
+				if (neighbour.getMSTEdges().size() == 1) {
+					n.setMatch(neighbour);
+					neighbour.setMatch(n);
+					
+					matchedSet.add(n);
+					matchedSet.add(neighbour);
+					break;
+				}
+
+				// Pick the one with the shortest distance
+				if (n.getWeight(neighbour) < shortestEdgeWeight) {
+					closestNeighbour = neighbour;
+					shortestEdgeWeight = n.getWeight(neighbour);
+				}
+				
+			}
+			
+			// At this point we have the shortest distance, or a lone neighbour
+			if (n.getMatch() == null) {
+				n.setMatch(closestNeighbour);
+				closestNeighbour.setMatch(n);
+			}
+		}
+	}
+	
 	/**
 	 * Finds the shortest path between two nodes. Sets a networks 
 	 * shortestPathList variable.
