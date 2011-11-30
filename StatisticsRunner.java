@@ -24,15 +24,6 @@ public class StatisticsRunner {
 	
 	// Run times
 	
-	// TODO Set these in your methods
-	protected double rtShortestPath;
-	protected double rtDiameter;
-	protected double rtHops;
-	
-	protected double omniRTShortestPath;
-	protected double omniRTDiameter;
-	protected double omniRTHops;
-	
 	
 	protected double averageShortest;
 	protected double averageDiameter;
@@ -72,40 +63,18 @@ public class StatisticsRunner {
 		
 		this.setNumNodes(numberOfNodesPerNetwork*numberOfNetworks);
 		
-		// compute the stats for the directed network
-		long startTime = System.currentTimeMillis();
+		//diameters
 		this.setAverageDiameter(averageDiameterOfNetworks(listOfDirectedNetworks));
-		long endTime = System.currentTimeMillis();
-		this.setRtDiameter((double)(endTime - startTime));
-		
-		// omnidirectional network
-		startTime = System.currentTimeMillis();
 		this.setOmniAverageDiameter(averageDiameterOfNetworks(listOfNetworks));
-		endTime = System.currentTimeMillis();
-		this.setOmniRTDiameter((double)(endTime - startTime));
-
 		
-		// directed shortest paths
-		startTime = System.currentTimeMillis();
+		// shortest paths
 		this.setAverageShortest(averageOfShortestPathsForNetwork(listOfDirectedNetworks));
-		endTime = System.currentTimeMillis();
-		this.setRtShortestPath((double)(endTime - startTime));
-		
-		startTime = System.currentTimeMillis();
 		this.setOmniAverageShortest(averageOfShortestPathsForNetwork(listOfNetworks));
-		endTime = System.currentTimeMillis();
-		this.setOmniRTShortestPath((double)(endTime - startTime));
-		
-		startTime = System.currentTimeMillis();
+	
+		//length of routes
 		this.setAverageLength(averageLengthOfNetworkList(listOfDirectedNetworks));
-		endTime = System.currentTimeMillis();
-		this.setRtHops((double)(endTime - startTime));
-		
-		
-		startTime = System.currentTimeMillis();
 		this.setOmniAverageLength(averageLengthOfNetworkList(listOfNetworks));
-		endTime = System.currentTimeMillis();
-		this.setOmniRTHops((double)(endTime - startTime));
+
 		
 	}
 	
@@ -129,21 +98,6 @@ public class StatisticsRunner {
 	}
 	
 	
-	/**
-	 * 
-	 */
-	public void shortestPaths() {
-		if (listOfDirectedNetworks.size() < 1) return; // no funny business..
-		
-		// TODO: shortest paths doesn't work for omnidirectional networks!
-		//System.out.println("Running shortest paths on " + listOfNetworks.size() + "  networks...");
-		//System.out.println("Done running shortest paths. Average nodes in shortest-path: " + averageOfShortestPathsForNetwork(listOfNetworks));
-		
-		System.out.println("Running shortest paths on " + listOfDirectedNetworks.size() + " directed networks...");
-		System.out.println("Done running shortest paths. Average nodes in shortest-path: " + averageOfShortestPathsForNetwork(listOfDirectedNetworks));
-	}
-	
-	
 	public double averageOfShortestPathsForNetwork(ArrayList<? extends Network> networks) {
 		int runningTotal = 0;
 		
@@ -156,16 +110,7 @@ public class StatisticsRunner {
 			runningTotal += shortestPath.size();
 		}
 		return (double)runningTotal/(double)networks.size();
-	}
-	
-	
-	public void diameterOfNetwork() {
-
-		System.out.println("Going to get the average diameter of " + listOfDirectedNetworks.size() + " directed networks");
-		//System.out.println("Done.. the average was: " + averageDiameterOfNetworks());
-		
-	}
-	
+	}	
 	
 	private double averageDiameterOfNetworks(ArrayList<? extends Network> networks) {
 		// find the shortest paths between every pair of nodes in the network
@@ -189,27 +134,11 @@ public class StatisticsRunner {
 					if (shortestPath.size() > currentLongestPath)
 						currentLongestPath = shortestPath.size();
 				}
-			}
-			
-			
+			}			
 			runningTotalOfNetworkDiameters += currentLongestPath;
 		}
 		
 		return (double)runningTotalOfNetworkDiameters/(double)networks.size();
-	}
-	
-	public void lengthOfRoutes() {
-		
-		if (listOfDirectedNetworks.size() < 1) return;
-		
-		// Doesn't work for omnidirectional because of shortestPaths
-		//System.out.println("Running lengthOfNetwork on " + listOfDirectedNetworks.size() + " omnidirectional networks...");
-		//System.out.println("Done running diameters. Average greatest distance is: " + averageLengthOfNetworkList(listOfNetworks));
-		
-		
-		System.out.println("Running lengthOfNetwork on " + listOfDirectedNetworks.size() + " directed networks...");
-		System.out.println("Done running diameters. Average greatest distance is: " + averageLengthOfNetworkList(listOfDirectedNetworks));
-		
 	}
 	
 	
@@ -292,54 +221,6 @@ public class StatisticsRunner {
 		return listOfNetworks.size();
 	}
 	/**
-	 * @return
-	 */
-	public double getRtShortestPath() {
-		return rtShortestPath;
-	}
-
-
-	/**
-	 * @param rtShortestPath
-	 */
-	public void setRtShortestPath(double rtShortestPath) {
-		this.rtShortestPath = rtShortestPath;
-	}
-
-
-	/**
-	 * @return
-	 */
-	public double getRtDiameter() {
-		return rtDiameter;
-	}
-
-
-	/**
-	 * @param rtDiameter
-	 */
-	public void setRtDiameter(double rtDiameter) {
-		this.rtDiameter = rtDiameter;
-	}
-
-
-	/**
-	 * @return
-	 */
-	public double getRtHops() {
-		return rtHops;
-	}
-
-
-	/**
-	 * @param rtHops
-	 */
-	public void setRtHops(double rtHops) {
-		this.rtHops = rtHops;
-	}
-
-
-	/**
 	 * @return the averageShortest
 	 */
 	public double getAverageShortest() {
@@ -385,55 +266,6 @@ public class StatisticsRunner {
 	public void setAverageLength(double averageLength) {
 		this.averageLength = averageLength;
 	}
-
-
-	/**
-	 * @return the omniRTShortestPath
-	 */
-	public double getOmniRTShortestPath() {
-		return omniRTShortestPath;
-	}
-
-
-	/**
-	 * @param omniRTShortestPath the omniRTShortestPath to set
-	 */
-	public void setOmniRTShortestPath(double omniRTShortestPath) {
-		this.omniRTShortestPath = omniRTShortestPath;
-	}
-
-
-	/**
-	 * @return the omniRTDiameter
-	 */
-	public double getOmniRTDiameter() {
-		return omniRTDiameter;
-	}
-
-
-	/**
-	 * @param omniRTDiameter the omniRTDiameter to set
-	 */
-	public void setOmniRTDiameter(double omniRTDiameter) {
-		this.omniRTDiameter = omniRTDiameter;
-	}
-
-
-	/**
-	 * @return the omniRTHops
-	 */
-	public double getOmniRTHops() {
-		return omniRTHops;
-	}
-
-
-	/**
-	 * @param omniRTHops the omniRTHops to set
-	 */
-	public void setOmniRTHops(double omniRTHops) {
-		this.omniRTHops = omniRTHops;
-	}
-
 
 	/**
 	 * @return the omniAverageShortest

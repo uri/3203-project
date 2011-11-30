@@ -156,11 +156,7 @@ public class Network {
 				end = n;
 		}
 
-		
-		//System.out.println("This is the weight to the last node: "
-		//		+ pathedList.get(pathedList.size() - 1).getDistance());
 		do {
-			
 			// TEMP FIX
 			if (end == null) break;
 			shortestPathList.add(end);
