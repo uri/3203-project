@@ -33,7 +33,7 @@ public class GraphPanel extends JPanel {
 		displayshortestPath = false;
 		displayDiameter = false;
 		displayEdges = false;
-		displayMatching = true;	//TODO change to false
+		displayMatching = false;
 	}
 	
 	
