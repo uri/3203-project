@@ -20,7 +20,7 @@ public class View extends JPanel{
     
     GraphPanel omniPanel, directedPanel;
 	JPanel statsPanel;
-    JTextField sensorsField, strengthField;
+    JTextField sensorsField, strengthField,networksField;
     JButton updateButton,statsButton,shortestPathButton,angleButton,edgeButton,diameterButton;
     private int placement;
 	
@@ -69,7 +69,6 @@ public class View extends JPanel{
 		sensorsLabel.setSize(60,TEXT_HEIGHT);
 		sensorsLabel.setLocation(10,0);
 		result.add(sensorsLabel);
-		
 		sensorsField = new JTextField("30");
 		sensorsField.setLocation(10,TEXT_HEIGHT);
 		sensorsField.setSize(FIELD_WIDTH,TEXT_HEIGHT);
@@ -84,6 +83,16 @@ public class View extends JPanel{
 		strengthField.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
 		strengthField.setSize(FIELD_WIDTH,TEXT_HEIGHT);
 		result.add(strengthField);
+		placement++;
+		JLabel networksLabel = new JLabel("Networks");
+		networksLabel.setSize(60,TEXT_HEIGHT);
+		networksLabel.setLocation(10+FIELD_WIDTH*placement,0);
+		result.add(networksLabel);
+		networksField = new JTextField("1");
+		networksField.setLocation(10+FIELD_WIDTH*placement,TEXT_HEIGHT);
+		networksField.setSize(FIELD_WIDTH,TEXT_HEIGHT);
+		result.add(networksField);
+		
 		placement++;
 		updateButton = new JButton("Go!");
 		updateButton.setSize(60,TEXT_HEIGHT);
@@ -172,6 +181,10 @@ public class View extends JPanel{
 			strengthField.setText("1000");
 		return Integer.parseInt(strengthField.getText());
 	}
+	
+	public int getNetworks(){
+		return Integer.parseInt(networksField.getText());
+	}
 
 	/**
 	 * @return
@@ -201,14 +214,5 @@ public class View extends JPanel{
 	}
 	
 	
-	//this is for testing the appearance of the view.
-/*	public static void main(String args[]){
-		JFrame f = new JFrame("test");
-		f.getContentPane().add(new View());
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(Frame.WIDTH,Frame.HEIGHT);
-		f.setVisible(true);
-		f.setResizable(false);
-	}*/
 
 }

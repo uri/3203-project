@@ -21,6 +21,8 @@ public class StatisticsRunner {
 
 	// Statistics
 	protected int numNodes;
+	protected double omniShortestPath,directedShortestPath;
+	protected double omniDiameter, directedDiameter;
 	
 	// Run times
 	
@@ -70,6 +72,10 @@ public class StatisticsRunner {
 		}
 		
 		this.setNumNodes(numberOfNodesPerNetwork);
+		omniShortestPath = averageOfShortestPathsForNetwork(listOfNetworks);
+		directedShortestPath = averageOfShortestPathsForNetwork(listOfDirectedNetworks);
+		omniDiameter = averageDiameterOfNetworks(listOfNetworks);
+		directedDiameter = averageDiameterOfNetworks(listOfDirectedNetworks);
 		
 		// compute the stats for the directed network
 		long startTime = System.currentTimeMillis();
@@ -125,7 +131,7 @@ public class StatisticsRunner {
 	}
 	
 	
-	private double averageOfShortestPathsForNetwork(ArrayList<? extends Network> networks) {
+	public double averageOfShortestPathsForNetwork(ArrayList<? extends Network> networks) {
 		int runningTotal = 0;
 		
 		for (Network net : networks) {
@@ -272,10 +278,6 @@ public class StatisticsRunner {
 	public int getNumNetworks() {
 		return listOfNetworks.size();
 	}
-	
-	
-
-
 	/**
 	 * @return
 	 */
@@ -498,7 +500,6 @@ public class StatisticsRunner {
 	public void setStrength(float strength) {
 		this.strength = strength;
 	}
-	
 	
 	
 

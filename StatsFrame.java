@@ -32,6 +32,9 @@ public class StatsFrame extends JFrame{
 	
 	Container contentPane;
 	
+	JLabel omniShortestPath, directedShortestPath;
+	JLabel omniDiameter, directedDiameter;
+	JLabel omniLength, directedLength;
 	JLabel 	numNodes;
 	JLabel  rtShortestPath;
 	JLabel  rtDiameter;
@@ -74,7 +77,7 @@ public class StatsFrame extends JFrame{
 		instructions.setLocation(5, 18);
 		getContentPane().add(instructions);
 		
-		
+	/*	
 		addLabel("Num Nodes", 0*LABEL_WIDTH , 1 * LABEL_HEIGHT );
 		
 		addLabel("Shortest Path T", 0*LABEL_WIDTH , 2 * LABEL_HEIGHT );
@@ -86,7 +89,7 @@ public class StatsFrame extends JFrame{
 		
 		addLabel("Strength", 0*LABEL_WIDTH , 5 * LABEL_HEIGHT );
 		addLabel("Total Nodes", 0*LABEL_WIDTH , 7 * LABEL_HEIGHT );
-		
+		*/
 		initDisplayLabels();
 		
 		slider = new JSlider(SwingConstants.HORIZONTAL, 5,100, 30);
@@ -126,7 +129,15 @@ public class StatsFrame extends JFrame{
 		if (stats == null) return;
 		
 		handleSlider(slider);
+		omniShortestPath.setText("" + (int)stats.getOmniAverageShortest());
+		directedShortestPath.setText("" + (int)stats.getAverageShortest());
 		
+		omniDiameter.setText("" +(int)stats.getOmniAverageDiameter());
+		directedDiameter.setText("" +(int)stats.getAverageDiameter());
+		
+		omniLength.setText("" + (int)stats.getOmniAverageLength());
+		directedLength.setText("" + (int)stats.getAverageLength());
+		/*
 		numNodes.setText(""+(int)stats.getNumNodes());
 		rtShortestPath.setText(""+(int)stats.getRtShortestPath());
 		rtDiameter.setText(""+(int)stats.getRtDiameter());
@@ -134,6 +145,7 @@ public class StatsFrame extends JFrame{
 		strength.setText(""+(int)stats.getStrength());
 		numNetworksLabel.setText(""+(int)stats.getNumNetworks());
 		totalNumberNodes.setText(""+ (int)(stats.getNumNodes() * stats.getNumNetworks()));
+		*/
 	}
 	
 
@@ -149,7 +161,20 @@ public class StatsFrame extends JFrame{
 	}
 	
 	private void initDisplayLabels() {
-		numNodes = new JLabel("0"); 
+		int position = 1;
+		omniShortestPath = new JLabel("0");
+		directedShortestPath = new JLabel("0");
+		createField("Shortest Paths",10,LABEL_HEIGHT*position,omniShortestPath,directedShortestPath);
+		position++;
+		omniDiameter = new JLabel("0");
+		directedDiameter = new JLabel("0");
+		createField("Network Diameter",10, LABEL_HEIGHT*position,omniDiameter,directedDiameter );
+		position++;
+		omniLength = new JLabel("0");
+		directedLength = new JLabel("0");
+		createField("Route Length", 10, LABEL_HEIGHT*position,omniLength,directedLength);
+		
+	/*	numNodes = new JLabel("0"); 
 		addLabel(numNodes, 1*LABEL_WIDTH , 1 * LABEL_HEIGHT );
 		
 		rtShortestPath  = new JLabel("0");
@@ -169,7 +194,23 @@ public class StatsFrame extends JFrame{
 		addLabel(numNetworksLabel, 1*LABEL_WIDTH , 6 * LABEL_HEIGHT );
 		
 		totalNumberNodes = new JLabel("0");
-		addLabel(totalNumberNodes, 1*LABEL_WIDTH , 7 * LABEL_HEIGHT );
+		addLabel(totalNumberNodes, 1*LABEL_WIDTH , 7 * LABEL_HEIGHT );*/
+	}
+	
+	public JLabel createField(String s, int x, int y, JLabel omni, JLabel directed){
+		JLabel temp = new JLabel(s);
+		temp.setSize(LABEL_WIDTH,LABEL_HEIGHT);
+		temp.setLocation(x,y);
+		getContentPane().add(temp);
+		contentPane.add(temp);
+		omni.setSize(LABEL_WIDTH,LABEL_HEIGHT);
+		omni.setLocation(x+LABEL_WIDTH+10,y);
+		getContentPane().add(omni);
+		directed.setSize(LABEL_WIDTH,LABEL_HEIGHT);
+		directed.setLocation(x+LABEL_WIDTH*2+10,y);
+		getContentPane().add(directed);
+		
+		return temp;
 	}
 
 	public void setStatisticsRunner(StatisticsRunner stats) {
